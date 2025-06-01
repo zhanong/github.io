@@ -1,0 +1,6 @@
+_site/
+.jekyll-cache/
+.sass-cache/
+.bundle/
+.jekyll-metadata
+# Other cache or local build files
