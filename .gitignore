@@ -1,6 +1,14 @@
 _site/
-.jekyll-cache/
+
 .sass-cache/
+
 .bundle/
+
+.jekyll-cache/
 .jekyll-metadata
+.jekyll-last-build
+
+*.gem
+Gemfile.lock
+*.rbc
 # Other cache or local build files
