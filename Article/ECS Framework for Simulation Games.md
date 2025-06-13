@@ -1,7 +1,7 @@
 ---
 title: ECS Framework
 Date: 2025-06-13
-featureImage: cover.jpg
+featureImage: img/cover.jpg
 summary: this is a framework
 
 ---
