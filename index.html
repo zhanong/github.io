@@ -41,6 +41,12 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Style for the active navigation link */
+        .nav-link.active {
+            color: #0f172a; /* slate-900 */
+            border-bottom-color: #0f172a; /* slate-900 */
+            font-weight: 500;
+        }
     </style>
 </head>
 <body class="bg-[#eef3f8]">
@@ -53,9 +59,10 @@
             <h1 class="text-5xl font-extrabold text-slate-800 mb-4 md:mb-0">Flying Island</h1>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="#" class="text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">Dev Log</a></li>
-                    <li><a href="#" class="text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">Tech</a></li>
-                    <li><a href="#" class="text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">Articles</a></li>
+                    <li><a href="#" class="nav-link text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors" data-category="All">All</a></li>
+                    <li><a href="#" class="nav-link text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors" data-category="Dev Log">Dev Log</a></li>
+                    <li><a href="#" class="nav-link text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors" data-category="Tech">Tech</a></li>
+                    <li><a href="#" class="nav-link text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors" data-category="articles">Articles</a></li>
                 </ul>
             </nav>
         </header>
@@ -72,73 +79,52 @@
 
     <script>
         // --- CONFIGURATION ---
-        // IMPORTANT: Replace these values with your GitHub username and repository name.
         const GITHUB_USER = 'zhanong';
-        const GITHUB_REPO = 'github.io';
+        const GITHUB_REPO = 'zhanong.github.io'; // Make sure this is correct
         // ---------------------
 
-        // Define the categories (folders) and their corresponding styles
         const CATEGORIES = {
             'Dev Log':  { colorClass: 'bg-white', textColor: 'text-slate-800' },
             'Tech':     { colorClass: 'bg-[#3b82f6]', textColor: 'text-white' },
-            'Article': { colorClass: 'bg-[#16a34a]', textColor: 'text-white' }
+            'articles': { colorClass: 'bg-[#16a34a]', textColor: 'text-white' }
         };
 
-        /**
-         * Parses the front matter from a markdown file's content.
-         * @param {string} text - The raw content of the .md file.
-         * @returns {object} An object with 'attributes' (the front matter) and 'body' (the rest of the content).
-         */
+        // This will hold all the posts after they are fetched once.
+        let allPosts = [];
+
         function parseFrontMatter(text) {
             const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
             const match = frontMatterRegex.exec(text);
-            
-            if (!match) {
-                return { attributes: {}, body: text };
-            }
+            if (!match) return { attributes: {}, body: text };
 
             const frontMatterBlock = match[1];
-            const body = text.substring(match[0].length);
             const attributes = {};
-
             frontMatterBlock.split('\n').forEach(line => {
                 const parts = line.split(':');
                 if (parts.length >= 2) {
                     const key = parts[0].trim();
                     const value = parts.slice(1).join(':').trim();
-                    if(key && value) {
-                       attributes[key] = value;
-                    }
+                    if (key && value) attributes[key] = value;
                 }
             });
-
-            return { attributes, body };
+            return { attributes, body: text.substring(match[0].length) };
         }
 
-        /**
-         * Creates the HTML for a single post card.
-         * @param {object} post - The post data.
-         * @returns {string} The HTML string for the card.
-         */
         function createPostCard(post) {
             const { title, summary, featureImage, Date: date } = post.attributes;
             const categoryStyle = CATEGORIES[post.category] || { colorClass: 'bg-white', textColor: 'text-slate-800' };
 
-            let contentHtml = '';
             if (featureImage) {
-                // If there's a feature image, use a structure with the image on top.
                 return `
                     <a href="${post.path.replace('.md', '.html')}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden">
-                        <img src="${featureImage}" alt="${title}" class="w-full h-56 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <img src="${featureImage}" alt="${title || ''}" class="w-full h-56 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <div style="display:none;" class="p-6 h-56 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
                         <div class="p-4 ${categoryStyle.colorClass}">
                             <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
                             <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
                         </div>
-                    </a>
-                `;
+                    </a>`;
             } else {
-                // If there's no image, use the summary as the main content.
                 return `
                     <a href="${post.path.replace('.md', '.html')}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col justify-between h-64 ${categoryStyle.colorClass} ${categoryStyle.textColor}">
                         <div>
@@ -146,15 +132,32 @@
                             <p class="text-base font-light">${summary || 'No summary available.'}</p>
                         </div>
                         <p class="text-sm opacity-75 mt-4 self-start">${date || ''}</p>
-                    </a>
-                `;
+                    </a>`;
             }
         }
 
-
         /**
-         * Fetches, parses, and renders all posts from the configured GitHub repository.
+         * Renders posts to the page, optionally filtering by category.
+         * @param {string} [categoryFilter] - The category to filter by. If 'All' or omitted, shows all posts.
          */
+        function renderPosts(categoryFilter = 'All') {
+            const container = document.getElementById('posts-container');
+            
+            const postsToRender = categoryFilter === 'All'
+                ? allPosts
+                : allPosts.filter(post => post.category === categoryFilter);
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.category === categoryFilter);
+            });
+
+            if (postsToRender.length > 0) {
+                container.innerHTML = postsToRender.map(createPostCard).join('');
+            } else {
+                container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found in this category.</p>';
+            }
+        }
+
         async function loadPosts() {
             const container = document.getElementById('posts-container');
             const loadingIndicator = document.getElementById('loading-indicator');
@@ -165,19 +168,18 @@
             }
 
             try {
-                let allPosts = [];
                 const categoryNames = Object.keys(CATEGORIES);
-
-                // Fetch files from all categories in parallel
                 const categoryPromises = categoryNames.map(async (category) => {
-                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${category}`;
+                    // Encode the category name to handle spaces in folder names like "Dev Log"
+                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(category)}`;
                     const response = await fetch(apiUrl);
-                    if (!response.ok) throw new Error(`Failed to fetch from ${category}: ${response.statusText}`);
+                    if (!response.ok) {
+                        console.warn(`Could not fetch from category "${category}". It might not exist.`);
+                        return []; // Return empty array if folder not found, instead of throwing an error
+                    }
                     const files = await response.json();
-
                     const mdFiles = files.filter(file => file.name.endsWith('.md'));
 
-                    // Fetch content for each markdown file in the category
                     const filePromises = mdFiles.map(async (file) => {
                         const fileResponse = await fetch(file.download_url);
                         if (!fileResponse.ok) return null;
@@ -185,26 +187,16 @@
                         const { attributes } = parseFrontMatter(content);
                         return { attributes, path: file.path, category };
                     });
-
                     return Promise.all(filePromises);
                 });
 
                 const results = await Promise.all(categoryPromises);
-                results.forEach(postBatch => {
-                    allPosts = allPosts.concat(postBatch.filter(Boolean)); // Filter out any nulls from failed fetches
-                });
+                const fetchedPosts = results.flat().filter(Boolean); // Flatten array and remove nulls
 
-                // Sort posts by date, newest first
-                allPosts.sort((a, b) => new Date(b.attributes.Date) - new Date(a.attributes.Date));
+                allPosts = fetchedPosts.sort((a, b) => new Date(b.attributes.Date) - new Date(a.attributes.Date));
 
-                // Render posts
                 loadingIndicator.style.display = 'none';
-                if (allPosts.length > 0) {
-                   container.innerHTML = allPosts.map(createPostCard).join('');
-                } else {
-                    container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found.</p>';
-                }
-
+                renderPosts(); // Initial render with all posts
             } catch (error) {
                 console.error('Error loading posts:', error);
                 loadingIndicator.style.display = 'none';
@@ -212,8 +204,21 @@
             }
         }
 
-        // Run the function when the page loads
-        document.addEventListener('DOMContentLoaded', loadPosts);
+        function setupEventListeners() {
+            const nav = document.querySelector('header nav');
+            nav.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    e.preventDefault();
+                    const category = e.target.dataset.category;
+                    renderPosts(category);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPosts();
+            setupEventListeners();
+        });
     </script>
 
 </body>
