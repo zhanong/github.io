@@ -172,7 +172,7 @@
                 const categoryPromises = categoryNames.map(async (category) => {
                     // Encode the category name to handle spaces in folder names like "Dev Log"
                     const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(category)}`;
-                    printf(`Fetching posts from category: ${category} (${apiUrl})`);
+                    console.log(`Fetching posts from category: ${category} (${apiUrl})`);
                     const response = await fetch(apiUrl);
                     if (!response.ok) {
                         console.warn(`Could not fetch from category "${category}". It might not exist.`);
