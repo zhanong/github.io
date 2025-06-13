@@ -1,8 +1,121 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-<a href="index2.html">Go to page 2</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Island</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* A subtle transition for the cards on hover */
+        .card-hover {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#eef3f8]">
+
+    <!-- Main Container -->
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+            <h1 class="text-5xl font-extrabold text-slate-800 mb-4 md:mb-0">Flying Island</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">Dev Log</a></li>
+                    <li><a href="#" class="text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">Tech</a></li>
+                    <li><a href="#" class="text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">Articles</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Grid for Content Cards -->
+        <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Card 1: Image -->
+            <a href="#" class="block bg-white rounded-lg shadow-md card-hover overflow-hidden">
+                <img src="https://placehold.co/600x400/FFFFFF/333333?text=建筑师转行\n到游戏里画图" alt="Architect to Game Artist" class="w-full h-56 object-cover">
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-700">Section Architect (Vol. 1)</h3>
+                </div>
+            </a>
+
+            <!-- Card 2: Blue Text -->
+            <a href="#" class="block bg-[#3b82f6] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-center items-center h-64">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold mb-2">可视化构建</h2>
+                    <p class="text-lg font-light mb-4">〰️⭐️➡️</p>
+                    <h3 class="text-3xl font-bold">游戏剧情</h3>
+                </div>
+            </a>
+
+            <!-- Card 3: Green Text -->
+            <a href="#" class="block bg-[#16a34a] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-start h-64">
+                <h2 class="text-xl font-bold mb-2">Section Architect (Vol. 2)</h2>
+                <p class="text-base font-light">The workflow for Unity's Entity Component System (ECS) is still evolving, and there are no established best practices yet.</p>
+            </a>
+            
+            <!-- Card 4: Green Text (Duplicate) -->
+            <a href="#" class="block bg-[#16a34a] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-start h-64">
+                <h2 class="text-xl font-bold mb-2">Section Architect (Vol. 2)</h2>
+                <p class="text-base font-light">The workflow for Unity's Entity Component System (ECS) is still evolving, and there are no established best practices yet.</p>
+            </a>
+
+            <!-- Card 5: Image (Duplicate) -->
+            <a href="#" class="block bg-white rounded-lg shadow-md card-hover overflow-hidden">
+                 <img src="https://placehold.co/600x400/FFFFFF/333333?text=建筑师转行\n到游戏里画图" alt="Architect to Game Artist" class="w-full h-56 object-cover">
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-700">Section Architect (Vol. 1)</h3>
+                </div>
+            </a>
+
+            <!-- Card 6: Blue Text (Duplicate) -->
+            <a href="#" class="block bg-[#3b82f6] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-center items-center h-64">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold mb-2">可视化构建</h2>
+                    <p class="text-lg font-light mb-4">〰️⭐️➡️</p>
+                    <h3 class="text-3xl font-bold">游戏剧情</h3>
+                </div>
+            </a>
+
+            <!-- Card 7: Green Text (Duplicate) -->
+            <a href="#" class="block bg-[#16a34a] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-start h-64">
+                 <h2 class="text-xl font-bold mb-2">Section Architect (Vol. 2)</h2>
+                <p class="text-base font-light">The workflow for Unity's Entity Component System (ECS) is still evolving, and there are no established best practices yet.</p>
+            </a>
+
+            <!-- Card 8: Blue Text (Duplicate) -->
+             <a href="#" class="block bg-[#3b82f6] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-center items-center h-64">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold mb-2">可视化构建</h2>
+                     <p class="text-lg font-light mb-4">〰️⭐️➡️</p>
+                    <h3 class="text-3xl font-bold">游戏剧情</h3>
+                </div>
+            </a>
+            
+            <!-- Card 9: Green Text (Duplicate) -->
+            <a href="#" class="block bg-[#16a34a] text-white rounded-lg shadow-md card-hover p-6 flex flex-col justify-start h-64">
+                 <h2 class="text-xl font-bold mb-2">Section Architect (Vol. 2)</h2>
+                 <p class="text-base font-light">The workflow for Unity's Entity Component System (ECS) is still evolving, and there are no established best practices yet.</p>
+            </a>
+
+        </main>
+    </div>
 </body>
 </html>
