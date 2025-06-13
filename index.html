@@ -171,7 +171,8 @@
                 const categoryNames = Object.keys(CATEGORIES);
                 const categoryPromises = categoryNames.map(async (category) => {
                     // Encode the category name to handle spaces in folder names like "Dev Log"
-                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(category)}`;
+                    const path = `posts/${encodeURIComponent(category)}`;
+                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`;
                     console.log(`Fetching posts from category: ${category} (${apiUrl})`);
                     const response = await fetch(apiUrl);
                     if (!response.ok) {
