@@ -47,10 +47,13 @@
             }
         }
 
-        function createPostCard(post) {
-            const { title, summary, featureImage, Date: date } = post.attributes;
+  function createPostCard(post) {
+            const { title, summary, featureImage, Date: date, link } = post.attributes;
             const categoryStyle = CATEGORIES[post.category] || { colorClass: 'bg-white', textColor: 'text-slate-800' };
-            const postUrl = `post.html?path=${post.path}`;
+            
+            const postUrl = link 
+                ? `post.html?url=${encodeURIComponent(link)}` 
+                : `post.html?path=${post.path}`;
 
             if (featureImage) {
                 return `

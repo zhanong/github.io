@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flying Island</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
+
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        
+
         <div id="header-placeholder"></div>
 
         <main id="post-container" class="bg-white p-8 sm:p-10 lg:p-12 rounded-lg shadow-md">
@@ -26,7 +28,7 @@
     </div>
 
     <script src="js/shared.js"></script>
-    
+
     <script>
         async function loadHeader() {
             try {
@@ -37,23 +39,37 @@
                 console.error('Error loading header:', error);
             }
         }
-        
+
         async function loadPost() {
             const container = document.getElementById('post-container');
             try {
                 const urlParams = new URLSearchParams(window.location.search);
-                const postPath = urlParams.get('path');
+                const externalUrl = urlParams.get('url'); // Check for an external URL first
+                const postPath = urlParams.get('path');   // Fallback to internal path
 
-                if (!postPath) {
-                    throw new Error("No post path specified in URL.");
+                let markdownContent;
+
+                if (externalUrl) {
+                    // If an external URL is provided, fetch the raw content directly from it.
+                    const response = await fetch(externalUrl);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch content from external URL: ${externalUrl}`);
+                    }
+                    markdownContent = await response.text();
+
+                } else if (postPath) {
+                    // If no external URL, use the original logic to fetch from the GitHub API.
+                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+
+                    const fileData = await response.json();
+                    markdownContent = atob(fileData.content); // Decode Base64 content
+                } else {
+                    throw new Error("No post path or URL specified.");
                 }
 
-                const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
-                const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-                
-                const fileData = await response.json();
-                const markdownContent = atob(fileData.content);
+                // Parses and renders the markdownContent
                 const { attributes, body } = parseFrontMatter(markdownContent);
 
                 if (attributes.title) {
@@ -78,4 +94,5 @@
         });
     </script>
 </body>
+
 </html>
