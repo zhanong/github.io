@@ -40,8 +40,26 @@
             }
         }
 
-        async function loadPost() {
+      async function loadPost() {
             const container = document.getElementById('post-container');
+
+            /**
+             * A helper function to rewrite relative image paths in Markdown.
+             * @param {string} markdownBody - The body of the markdown file.
+             * @param {string} baseUrl - The base URL of the repository folder where the file resides.
+             * @returns {string} Markdown with absolute image paths.
+             */
+            function rewriteRelativeImagePaths(markdownBody, baseUrl) {
+                // This regex finds all markdown images: ![alt text](path)
+                const imageRegex = /!\[(.*?)\]\((?!https?:\/\/)(.*?)\)/g;
+
+                return markdownBody.replace(imageRegex, (match, altText, imagePath) => {
+                    // Create a full URL, ensuring no double slashes.
+                    const fullUrl = new URL(imagePath, baseUrl).href;
+                    return `![${altText}](${fullUrl})`;
+                });
+            }
+
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const externalUrl = urlParams.get('url');
@@ -50,18 +68,18 @@
                 let displayTitle, displayDate, contentBody;
 
                 if (externalUrl) {
+                    // --- EXTERNAL POST LOGIC ---
                     displayTitle = urlParams.get('title');
                     displayDate = urlParams.get('date');
 
-                    // Fetch the content from the external URL.
                     const response = await fetch(externalUrl);
                     if (!response.ok) {
                         throw new Error(`Failed to fetch content from external URL: ${externalUrl}`);
                     }
                     const externalMarkdown = await response.text();
+                    let { body } = parseFrontMatter(externalMarkdown);
                     
-                    const { body } = parseFrontMatter(externalMarkdown);
-                    contentBody = body;
+                    contentBody = rewriteRelativeImagePaths(body, externalUrl);
                     
                 } else if (postPath) {
 
@@ -75,11 +93,12 @@
                     const { attributes, body } = parseFrontMatter(markdownContent);
                     displayTitle = attributes.title;
                     displayDate = attributes.Date;
-                    contentBody = body;
+                    contentBody = body; 
                 } else {
                     throw new Error("No post path or URL specified.");
                 }
 
+                // --- RENDER THE PAGE (unified for both post types) ---
                 if (displayTitle) {
                     document.title = `${displayTitle} | Flying Island`;
                 }
