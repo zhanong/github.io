@@ -44,42 +44,50 @@
             const container = document.getElementById('post-container');
             try {
                 const urlParams = new URLSearchParams(window.location.search);
-                const externalUrl = urlParams.get('url'); // Check for an external URL first
-                const postPath = urlParams.get('path');   // Fallback to internal path
+                const externalUrl = urlParams.get('url');
+                const postPath = urlParams.get('path');
 
-                let markdownContent;
+                let displayTitle, displayDate, contentBody;
 
                 if (externalUrl) {
-                    // If an external URL is provided, fetch the raw content directly from it.
+                    displayTitle = urlParams.get('title');
+                    displayDate = urlParams.get('date');
+
+                    // Fetch the content from the external URL.
                     const response = await fetch(externalUrl);
                     if (!response.ok) {
                         throw new Error(`Failed to fetch content from external URL: ${externalUrl}`);
                     }
-                    markdownContent = await response.text();
-
+                    const externalMarkdown = await response.text();
+                    
+                    const { body } = parseFrontMatter(externalMarkdown);
+                    contentBody = body;
+                    
                 } else if (postPath) {
-                    // If no external URL, use the original logic to fetch from the GitHub API.
+
                     const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
                     const response = await fetch(apiUrl);
                     if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-
+                    
                     const fileData = await response.json();
-                    markdownContent = atob(fileData.content); // Decode Base64 content
+                    const markdownContent = atob(fileData.content);
+                    
+                    const { attributes, body } = parseFrontMatter(markdownContent);
+                    displayTitle = attributes.title;
+                    displayDate = attributes.Date;
+                    contentBody = body;
                 } else {
                     throw new Error("No post path or URL specified.");
                 }
 
-                // Parses and renders the markdownContent
-                const { attributes, body } = parseFrontMatter(markdownContent);
-
-                if (attributes.title) {
-                    document.title = `${attributes.title} | Flying Island`;
+                if (displayTitle) {
+                    document.title = `${displayTitle} | Flying Island`;
                 }
-                const postHTML = marked.parse(body);
+                const postHTML = marked.parse(contentBody);
 
                 container.innerHTML = `
-                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${attributes.title || 'Untitled Post'}</h1>
-                    <p class="text-slate-500 mb-8">${attributes.Date || ''}</p>
+                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
+                    <p class="text-slate-500 mb-8">${displayDate || ''}</p>
                     <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
                 `;
             } catch (error) {
