@@ -13,6 +13,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -29,6 +32,18 @@
 
     <script src="js/shared.js"></script>
 
+    <script
+        src="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js)"></script>
+    <script>
+        // Configure marked.js to use highlight.js
+        marked.setOptions({
+            highlight: function (code, lang) {
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            }
+        });
+    </script>
+
     <script defer>
         async function loadHeader() {
             try {
@@ -40,7 +55,7 @@
             }
         }
 
-      async function loadPost() {
+        async function loadPost() {
             const container = document.getElementById('post-container');
 
             /**
@@ -78,22 +93,22 @@
                     }
                     const externalMarkdown = await response.text();
                     let { body } = parseFrontMatter(externalMarkdown);
-                    
+
                     contentBody = rewriteRelativeImagePaths(body, externalUrl);
-                    
+
                 } else if (postPath) {
 
                     const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
                     const response = await fetch(apiUrl);
                     if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-                    
+
                     const fileData = await response.json();
                     const markdownContent = atob(fileData.content);
-                    
+
                     const { attributes, body } = parseFrontMatter(markdownContent);
                     displayTitle = attributes.title;
                     displayDate = attributes.Date;
-                    contentBody = body; 
+                    contentBody = body;
                 } else {
                     throw new Error("No post path or URL specified.");
                 }
