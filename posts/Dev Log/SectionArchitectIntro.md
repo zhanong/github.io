@@ -1,7 +1,7 @@
 ---
 title: Section Architect | Intro
 date: 2025-06-01
-featureImage: img/cover.jpg
+featureImage: img/SectionArchitectCover.jpg
 ---
 
 <div class="video-container">
