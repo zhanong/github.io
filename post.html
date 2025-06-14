@@ -38,8 +38,13 @@
         // Configure marked.js to use highlight.js
         marked.setOptions({
             highlight: function (code, lang) {
-                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                return hljs.highlight(code, { language }).value;
+                // Create a mapping for c# to csharp for highlight.js
+                const language = lang === 'c#' ? 'csharp' : lang;
+                // Check if the language is supported, otherwise default to plaintext
+                if (hljs.getLanguage(language)) {
+                    return hljs.highlight(code, { language }).value;
+                }
+                return hljs.highlight(code, { language: 'plaintext' }).value;
             }
         });
     </script>
