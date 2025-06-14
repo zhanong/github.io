@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="[https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css](https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css)" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
@@ -109,6 +110,8 @@
                     <p class="text-slate-500 mb-8">${displayDate || ''}</p>
                     <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
                 `;
+
+                Prism.highlightAll();
             } catch (error) {
                 console.error('Error loading post:', error);
                 container.innerHTML = `<p class="text-red-500">Could not load post. Check console for details.</p>`;
@@ -120,6 +123,10 @@
             await loadPost();
         });
     </script>
+    
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js](https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js)"></script>
+    <script src="js/shared.js"></script>
+
 </body>
 
 </html>
