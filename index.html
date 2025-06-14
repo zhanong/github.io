@@ -48,7 +48,7 @@
         }
 
         function createPostCard(post) {
-            const { title, summary, featureImage, Date: date, link } = post.attributes;
+            const { title, summary, featureImage, date, link } = post.attributes;
             const categoryStyle = CATEGORIES[post.category] || { colorClass: 'bg-white', textColor: 'text-slate-800' };
             
             let postUrl;
@@ -120,7 +120,7 @@
                 });
 
                 const results = await Promise.all(categoryPromises);
-                allPosts = results.flat().filter(Boolean).sort((a, b) => new Date(b.attributes.Date) - new Date(a.attributes.Date));
+                allPosts = results.flat().filter(Boolean).sort((a, b) => new Date(b.attributes.date) - new Date(a.attributes.date));
 
                 loadingIndicator.style.display = 'none';
                 renderPosts(new URLSearchParams(window.location.hash.substring(1)).get('category') || 'All');
