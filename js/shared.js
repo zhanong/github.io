@@ -19,7 +19,14 @@ function parseFrontMatter(text) {
         const parts = line.split(':');
         if (parts.length >= 2) {
             const key = parts[0].trim();
-            const value = parts.slice(1).join(':').trim();
+            // Get the value and trim whitespace
+            let value = parts.slice(1).join(':').trim();
+            
+            // **NEW:** Check for and remove surrounding quotes from the value
+            if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
+                value = value.substring(1, value.length - 1);
+            }
+            
             if (key && value) attributes[key] = value;
         }
     });
