@@ -38,7 +38,8 @@
 
         async function loadHeader() {
             try {
-                const response = await fetch('_includes/header.html');
+                // Corrected path to the 'includes' folder
+                const response = await fetch('includes/header.html');
                 const headerHTML = await response.text();
                 document.getElementById('header-placeholder').innerHTML = headerHTML;
             } catch (error) {
