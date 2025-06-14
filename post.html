@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Island</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef3f8;
+        }
+        /* Style for the active navigation link */
+        .nav-link.active {
+            color: #0f172a; /* slate-900 */
+            border-bottom-color: #0f172a; /* slate-900 */
+            font-weight: 500;
+        }
+        /* Styles for the generated blog content */
+        .post-content h1, .post-content h2, .post-content h3 {
+            font-weight: bold;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .post-content h1 { font-size: 2.25rem; }
+        .post-content h2 { font-size: 1.875rem; }
+        .post-content h3 { font-size: 1.5rem; }
+        .post-content p { margin-bottom: 1.25rem; line-height: 1.7; }
+        .post-content a { color: #3b82f6; text-decoration: underline; }
+        .post-content code {
+            background-color: #f1f5f9;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+        }
+        .post-content pre code {
+            display: block;
+            padding: 1em;
+            overflow-x: auto;
+        }
+        .post-content ul { list-style-type: disc; padding-left: 2em; margin-bottom: 1em; }
+        .post-content ol { list-style-type: decimal; padding-left: 2em; margin-bottom: 1em; }
+        .post-content blockquote {
+            border-left: 4px solid #cbd5e1;
+            padding-left: 1em;
+            margin-left: 0;
+            font-style: italic;
+            color: #475569;
+        }
+    </style>
+</head>
+<body class="bg-[#eef3f8]">
+
+    <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+            <h1 class="text-5xl font-extrabold text-slate-800 mb-4 md:mb-0">
+                <a href="index.html">Flying Island</a>
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="nav-link text-lg text-slate-600 hover:text-slate-900 pb-1 border-b-2 border-transparent hover:border-slate-900 transition-colors">All Posts</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="post-container" class="bg-white p-8 sm:p-10 lg:p-12 rounded-lg shadow-md">
+            <p id="loading-message" class="text-slate-600">Loading post...</p>
+        </main>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const GITHUB_USER = 'zhanong';
+        const GITHUB_REPO = 'github.io';
+        // ---------------------
+
+        function parseFrontMatter(text) {
+            const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+            const match = frontMatterRegex.exec(text);
+            if (!match) return { attributes: {}, body: text };
+            // Simple parsing, can be improved
+            const frontMatterBlock = match[1];
+            const attributes = {};
+            frontMatterBlock.split('\n').forEach(line => {
+                const parts = line.split(':');
+                if (parts.length >= 2) {
+                    const key = parts[0].trim();
+                    const value = parts.slice(1).join(':').trim();
+                    if (key && value) attributes[key] = value;
+                }
+            });
+            return { attributes, body: text.substring(match[0].length) };
+        }
+
+        async function loadPost() {
+            const container = document.getElementById('post-container');
+            const loadingMessage = document.getElementById('loading-message');
+            
+            try {
+                // Get the post's path from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const postPath = urlParams.get('path');
+
+                if (!postPath) {
+                    container.innerHTML = `<p class="text-red-500">Error: No post path specified.</p>`;
+                    return;
+                }
+
+                const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
+                
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch post from GitHub. Status: ${response.status}`);
+                }
+                const fileData = await response.json();
+                
+                // The content is Base64 encoded, so we need to decode it
+                const markdownContent = atob(fileData.content);
+                const { attributes, body } = parseFrontMatter(markdownContent);
+
+                // Update page title
+                if (attributes.title) {
+                    document.title = `${attributes.title} | Flying Island`;
+                }
+
+                // Convert Markdown body to HTML
+                const postHTML = marked.parse(body);
+
+                // Construct the final HTML for the post
+                container.innerHTML = `
+                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${attributes.title || 'Untitled Post'}</h1>
+                    <p class="text-slate-500 mb-8">${attributes.Date || ''}</p>
+                    <div class="post-content prose lg:prose-xl max-w-none">
+                        ${postHTML}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading post:', error);
+                container.innerHTML = `<p class="text-red-500">Could not load post. Check console for details.</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPost);
+    </script>
+
+</body>
+</html>

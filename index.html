@@ -116,7 +116,7 @@
 
             if (featureImage) {
                 return `
-                    <a href="${post.path.replace('.md', '.html')}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden">
+                    <a href="post.html?path=${post.path}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden">
                         <img src="${featureImage}" alt="${title || ''}" class="w-full h-56 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <div style="display:none;" class="p-6 h-56 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
                         <div class="p-4 ${categoryStyle.colorClass}">
@@ -126,7 +126,7 @@
                     </a>`;
             } else {
                 return `
-                    <a href="${post.path.replace('.md', '.html')}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col justify-between h-64 ${categoryStyle.colorClass} ${categoryStyle.textColor}">
+                    <a href="post.html?path=${post.path}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col justify-between h-64 ${categoryStyle.colorClass} ${categoryStyle.textColor}">
                         <div>
                             <h2 class="text-xl font-bold mb-2">${title || 'Untitled Post'}</h2>
                             <p class="text-base font-light">${summary || 'No summary available.'}</p>
