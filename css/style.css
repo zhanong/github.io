@@ -1,3 +1,7 @@
+.equal-height-grid {
+    grid-auto-rows: 1fr;
+}
+
 /* Use the Inter font family */
 body {
     font-family: 'Inter', sans-serif;

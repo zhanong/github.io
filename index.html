@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +13,21 @@
 
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
         <div id="header-placeholder"></div>
 
-        <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div id="loading-indicator" class="col-span-full text-center">
-                <div class="loader"></div>
-                <p class="text-slate-600">Loading posts...</p>
-            </div>
-        </main>
+        <div class="bg-violet-100 p-4 sm:p-8 rounded-lg"> 
+            <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="loading-indicator" class="col-span-full text-center">
+                    <div class="loader"></div>
+                    <p class="text-slate-600">Loading posts...</p>
+                </div>
+            </main>
+        </div>
     </div>
 
     <script src="js/shared.js"></script>
@@ -81,18 +85,20 @@
             }
 
             if (featureImage) {
+                // Added 'flex flex-col' to make the card a column-based flex container
                 return `
-                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden">
+                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
                         <img src="${featureImage}" alt="${title || ''}" class="w-full h-56 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <div style="display:none;" class="p-6 h-56 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
-                        <div class="p-4 ${categoryStyle.colorClass}">
+                        <div class="p-4 ${categoryStyle.colorClass} flex-grow flex flex-col justify-between">
                             <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
                             <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
                         </div>
                     </a>`;
             } else {
+                // Added 'flex flex-col' and removed 'h-64' to allow the card to stretch
                 return `
-                    <a href="${postUrl}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col justify-between h-64 ${categoryStyle.colorClass} ${categoryStyle.textColor}">
+                    <a href="${postUrl}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col justify-between ${categoryStyle.colorClass} ${categoryStyle.textColor}">
                         <div>
                             <h2 class="text-xl font-bold mb-2">${title || 'Untitled Post'}</h2>
                             <p class="text-base font-light">${summary || 'No summary available.'}</p>
@@ -176,4 +182,5 @@
         });
     </script>
 </body>
+
 </html>
