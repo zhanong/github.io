@@ -6,16 +6,10 @@
     "textColor": "text-slate-800"
   },
   {
-    "name": "Dev Log",
-    "folder": "Dev Log",
+    "name": "Game",
+    "folder": "Game",
     "colorClass": "bg-white",
     "textColor": "text-slate-800"
-  },
-  {
-    "name": "Tech",
-    "folder": "Tech",
-    "colorClass": "bg-[#3b82f6]",
-    "textColor": "text-white"
   },
   {
     "name": "Article",
