@@ -1,0 +1,26 @@
+[
+  {
+    "name": "All",
+    "folder": null,
+    "colorClass": "bg-white",
+    "textColor": "text-slate-800"
+  },
+  {
+    "name": "Dev Log",
+    "folder": "Dev Log",
+    "colorClass": "bg-white",
+    "textColor": "text-slate-800"
+  },
+  {
+    "name": "Tech",
+    "folder": "Tech",
+    "colorClass": "bg-[#3b82f6]",
+    "textColor": "text-white"
+  },
+  {
+    "name": "Article",
+    "folder": "Article",
+    "colorClass": "bg-[#16a34a]",
+    "textColor": "text-white"
+  }
+]
