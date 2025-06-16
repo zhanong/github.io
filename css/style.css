@@ -14,7 +14,13 @@
  */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #eef3f8;
+    /* background-color: #eef3f8; */
+    background: linear-gradient(to bottom right, #e3f2fd, #f1e4f3);
+    background-attachment: fixed;
+}
+
+.content-gradient {
+    background: linear-gradient(to bottom right, rgb(243 232 255 / 0.8), rgb(231 223 252 / 0.9));
 }
 
 /*
@@ -58,8 +64,13 @@ body {
  * to 360 degrees, creating a continuous spinning effect.
  */
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /*
@@ -69,7 +80,8 @@ body {
  */
 .nav-link {
     padding: 0.25rem 0.75rem;
-    border-radius: 1rem; /* rounded-md */
+    border-radius: 1rem;
+    /* rounded-md */
     transition: all 0.5s ease-in-out;
 }
 
@@ -80,7 +92,8 @@ body {
  */
 .nav-link.active {
     color: white;
-    background-color: #c026d3; /* A nice Fuchsia color from Tailwind */
+    background-color: #c026d3;
+    /* A nice Fuchsia color from Tailwind */
     font-weight: 500;
     border-bottom-color: transparent;
 }
@@ -99,35 +112,51 @@ body {
  * They make the headings bold and add some space above and below them
  * to separate them from other content.
  */
-.post-content h1, .post-content h2, .post-content h3 {
+.post-content h1,
+.post-content h2,
+.post-content h3 {
     font-weight: bold;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
 }
 
 /* Defines the font size for the main heading (h1). */
-.post-content h1 { font-size: 2.25rem; }
+.post-content h1 {
+    font-size: 2.25rem;
+}
+
 /* Defines the font size for a sub-heading (h2). */
-.post-content h2 { font-size: 1.875rem; }
+.post-content h2 {
+    font-size: 1.875rem;
+}
+
 /* Defines the font size for a smaller sub-heading (h3). */
-.post-content h3 { font-size: 1.5rem; }
+.post-content h3 {
+    font-size: 1.5rem;
+}
 
 /*
  * This styles the paragraphs within the blog post content.
  * It adds some space at the bottom of each paragraph and increases the
  * line height to make the text easier to read.
  */
-.post-content p { margin-bottom: 1.25rem; line-height: 1.7; }
+.post-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+}
 
 /* Styles links within the post content, making them blue and underlined. */
-.post-content a { color: #3b82f6; text-decoration: underline; }
+.post-content a {
+    color: #3b82f6;
+    text-decoration: underline;
+}
 
 /*
  * This styles inline code snippets (e.g., `code` tags not inside a `<pre>` tag).
  * It gives them a light gray background, a different text color, and
  * rounded corners to make them look like code.
  */
-.post-content :not(pre) > code {
+.post-content :not(pre)>code {
     background-color: #f1f5f9;
     color: #475569;
     padding: 0.2em 0.4em;
@@ -148,10 +177,18 @@ body {
 }
 
 /* Styles unordered (bulleted) lists with standard disc bullets and padding. */
-.post-content ul { list-style-type: disc; padding-left: 2em; margin-bottom: 1em; }
+.post-content ul {
+    list-style-type: disc;
+    padding-left: 2em;
+    margin-bottom: 1em;
+}
 
 /* Styles ordered (numbered) lists with decimal numbers and padding. */
-.post-content ol { list-style-type: decimal; padding-left: 2em; margin-bottom: 1em; }
+.post-content ol {
+    list-style-type: decimal;
+    padding-left: 2em;
+    margin-bottom: 1em;
+}
 
 /*
  * This styles blockquotes.
@@ -175,7 +212,8 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%;
+    /* 16:9 Aspect Ratio */
     margin-bottom: 1.25rem;
 }
 
