@@ -1,5 +1,5 @@
 ---
-title: ''
+title: 'About'
 ---
 
 Hi! Welcome to the **Flying Island**. A floating island where I built my own stuff.
