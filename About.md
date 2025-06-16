@@ -3,7 +3,7 @@ title: ' '
 ---
 
 
-<img src="img/logo.png" style="align: center; margin-bottom: 4em; width: 7em;">
+<img src="img/logo.png" class="about-logo">
 
 Hi! Welcome to the **Flying Island**, a floating island where I built my own stuff.
 
