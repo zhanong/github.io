@@ -40,6 +40,7 @@
                 const response = await fetch('includes/header.html');
                 const headerHTML = await response.text();
                 document.getElementById('header-placeholder').innerHTML = headerHTML;
+
             } catch (error) {
                 console.error('Error loading header:', error);
             }
@@ -59,8 +60,22 @@
             }
         }
 
-        function generateHeaderLinks() {
-            const navLinksContainer = document.getElementById('category-nav-links');
+        function generateAboutButton() {
+            const navPlaceholder = document.getElementById('nav-placeholder');
+            if (!navPlaceholder) return; // Guard against missing element
+            
+            navPlaceholder.innerHTML = `
+            <nav class="flex items-center space-x-4">
+                <a href="post.html?path=About.md" class="nav-link">About</a>
+                <span class="text-slate-300">|</span>
+                <ul id="category-buttons" class="flex space-x-2">
+                </ul>
+            </nav>
+            `;
+        }
+
+        function generateCategoryButtons() {
+            const navLinksContainer = document.getElementById('category-buttons');
             if (!navLinksContainer) return; // Guard against missing element
 
             navLinksContainer.innerHTML = categoriesConfig.map(category => `
@@ -160,7 +175,6 @@
         function setupEventListeners() {
             // Use event delegation on the header placeholder for robustness
             document.getElementById('header-placeholder').addEventListener('click', (e) => {
-                // Only trigger for elements with the 'category-filter' class
                 if (e.target.matches('.category-filter')) {
                     e.preventDefault();
                     const category = e.target.dataset.category;
@@ -173,7 +187,8 @@
         document.addEventListener('DOMContentLoaded', async () => {
             await loadHeader();
             await loadConfig();
-            generateHeaderLinks();
+            generateAboutButton();
+            generateCategoryButtons();
             setupEventListeners();
             loadPosts();
         });
