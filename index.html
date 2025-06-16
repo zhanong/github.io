@@ -85,56 +85,6 @@
             }
 
             if (featureImage) {
-                // Added 'flex flex-col' to make the card a column-based flex container
-                return `
-                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
-                        <img src="${featureImage}" alt="${title || ''}" class="w-full h-56 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="p-6 h-56 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
-                        <div class="p-4 ${categoryStyle.colorClass} flex-grow flex flex-col justify-between">
-                            <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
-                            <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
-                        </div>
-                    </a>`;
-            } else {
-                // Added 'flex flex-col' and removed 'h-64' to allow the card to stretch
-                return `
-                    <a href="${postUrl}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col justify-between ${categoryStyle.colorClass} ${categoryStyle.textColor}">
-                        <div>
-                            <h2 class="text-xl font-bold mb-2">${title || 'Untitled Post'}</h2>
-                            <p class="text-base font-light">${summary || 'No summary available.'}</p>
-                        </div>
-                        <p class="text-sm opacity-75 mt-4 self-start">${date || ''}</p>
-                    </a>`;
-            }
-        }
-
-        function renderPosts(categoryFilter = 'All') {
-            const container = document.getElementById('posts-container');
-            const postsToRender = categoryFilter === 'All' ? allPosts : allPosts.filter(post => post.category === categoryFilter);
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.toggle('active', link.dataset.category === categoryFilter);
-            });
-
-            if (postsToRender.length > 0) {
-                container.innerHTML = postsToRender.map(createPostCard).join('');
-            } else {
-                container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found in this category.</p>';
-            }
-        }
-
-        function createPostCard(post) {
-            const { title, summary, featureImage, date, link } = post.attributes;
-            const categoryStyle = post.categoryConfig || { colorClass: 'bg-white', textColor: 'text-slate-800' };
-
-            let postUrl;
-            if (link) {
-                postUrl = `post.html?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}&date=${encodeURIComponent(date)}`;
-            } else {
-                postUrl = `post.html?path=${post.path}`;
-            }
-
-            if (featureImage) {
                 // NEW LAYOUT for cards with a feature image: Title and Date at the top, followed by the Feature Image.
                 return `
                     <a href="${postUrl}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
@@ -155,6 +105,59 @@
                             <p class="text-base font-light">${summary || 'No summary available.'}</p>
                         </div>
                     </a>`;
+            }
+        }
+
+        function renderPosts(categoryFilter = 'All') {
+            const container = document.getElementById('posts-container');
+            const postsToRender = categoryFilter === 'All' ? allPosts : allPosts.filter(post => post.category === categoryFilter);
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.category === categoryFilter);
+            });
+
+            if (postsToRender.length > 0) {
+                container.innerHTML = postsToRender.map(createPostCard).join('');
+            } else {
+                container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found in this category.</p>';
+            }
+        }
+
+        async function loadPosts() {
+            const container = document.getElementById('posts-container');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            try {
+                const fetchableCategories = categoriesConfig.filter(cat => cat.folder); // Don't try to fetch for "All"
+
+                const categoryPromises = fetchableCategories.map(async (category) => {
+                    const path = `posts/${encodeURIComponent(category.folder)}`;
+                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`;
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) return [];
+                    const files = await response.json();
+                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
+
+                    const filePromises = mdFiles.map(async (file) => {
+                        const fileResponse = await fetch(file.download_url);
+                        if (!fileResponse.ok) return null;
+                        const content = await fileResponse.text();
+                        const { attributes } = parseFrontMatter(content);
+                        // Attach category and its config to the post object
+                        return { attributes, path: file.path, category: category.name, categoryConfig: category };
+                    });
+                    return Promise.all(filePromises);
+                });
+
+                const results = await Promise.all(categoryPromises);
+                allPosts = results.flat().filter(Boolean).sort((a, b) => new Date(b.attributes.date) - new Date(a.attributes.date));
+
+                loadingIndicator.style.display = 'none';
+                renderPosts(new URLSearchParams(window.location.hash.substring(1)).get('category') || 'All');
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                loadingIndicator.style.display = 'none';
+                container.innerHTML = `<p class="col-span-full text-center text-red-500">Error loading posts.</p>`;
             }
         }
 
