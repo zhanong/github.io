@@ -92,7 +92,7 @@ body {
  */
 .nav-link.active {
     color: #0f172a;
-    background-color: #d8cef0;
+    background-color: #dec5f7;
     /* A nice Fuchsia color from Tailwind */
     font-weight: 500;
     border-bottom-color: transparent;
