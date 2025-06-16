@@ -15,13 +15,12 @@
 </head>
 
 <body>
-
     <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
         <div id="header-placeholder"></div>
 
-        <div class="bg-violet-100 p-4 sm:p-8 rounded-lg">
-            <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-violet-100 p-6 sm:p-12 rounded-2xl"> <!-- content background -->
+            <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> <!-- grid -->
                 <div id="loading-indicator" class="col-span-full text-center">
                     <div class="loader"></div>
                     <p class="text-slate-600">Loading posts...</p>
@@ -85,9 +84,9 @@
             }
 
             if (featureImage) {
-                // NEW LAYOUT for cards with a feature image: Title and Date at the top, followed by the Feature Image.
+                // Postcards with a feature image.
                 return `
-                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
+                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
                         <div class="p-4">
                             <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
                             <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
@@ -96,9 +95,9 @@
                         <div style="display:none;" class="p-6 h-48 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
                     </a>`;
             } else {
-                // NEW LAYOUT for cards with a summary: Title, then Date, then Summary.
+                // Postcards without a feature image
                 return `
-                    <a href="${postUrl}" class="block rounded-lg shadow-md card-hover p-6 flex flex-col ${categoryStyle.colorClass} ${categoryStyle.textColor}">
+                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover p-6 flex flex-col ">
                         <div>
                             <h2 class="text-xl font-bold mb-2">${title || 'Untitled Post'}</h2>
                             <p class="text-sm opacity-75 mb-4">${date || ''}</p>
