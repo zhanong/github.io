@@ -14,7 +14,7 @@
  */
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(to bottom right, #d6e9f7, #f1e4f3, #d6e9f7,);
+    background: linear-gradient(to bottom right, #d6e9f7, #f1e4f3, #d6e9f7);
     background-size: 200% 200%;
     background-attachment: fixed;
     animation: gradientAnimation 15s ease infinite;
