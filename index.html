@@ -83,27 +83,27 @@
                 postUrl = `post.html?path=${post.path}`;
             }
 
-            const postCardHead = `
-                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
-                        <div class="p-4">
-                            <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
-                            <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
-                    `;
+            // const postCardHead = `
+            //         <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
+            //             <div class="p-4">
+            //                 <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
+            //                 <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
+            //         `;
 
-            let postCardBody = '';
+            // let postCardBody = '';
 
-            if (featureImage) {
-                postCardBody = `
-                        <img src="${featureImage}" alt="${title || ''}" class="w-full h-48 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="p-6 h-48 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
-                        `;
-            } else {
-                postCardBody = `
-                        <p class="text-base font-light">${summary || 'No summary available.'}</p>
-                        `;
-            }
+            // if (featureImage) {
+            //     postCardBody = `
+            //             <img src="${featureImage}" alt="${title || ''}" class="w-full h-48 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            //             <div style="display:none;" class="p-6 h-48 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
+            //             `;
+            // } else {
+            //     postCardBody = `
+            //             <p class="text-base font-light">${summary || 'No summary available.'}</p>
+            //             `;
+            // }
 
-            return postCardHead + postCardBody + '</a>';
+            // return postCardHead + postCardBody + '</a>';
 
             // if (featureImage) {
             //     // Postcards with a feature image.
@@ -127,6 +127,28 @@
             //             </div>
             //         </a>`;
             // }
+            if (featureImage) {
+                // Postcards with a feature image.
+                return `
+                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
+                        <div class="p-4">
+                            <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
+                            <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
+                        </div>
+                        <img src="${featureImage}" alt="${title || ''}" class="w-full h-48 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="p-6 h-48 flex flex-col justify-center items-center ${categoryStyle.textColor}">${summary || ''}</div>
+                    </a>`;
+            } else {
+                // Postcards without a feature image
+                return `
+                    <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover p-6 flex flex-col ">
+                        <div class="p-4">
+                            <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
+                            <p class="text-sm ${categoryStyle.textColor} opacity-75">${date || ''}</p>
+                            <p class="text-base font-light">${summary || 'No summary available.'}</p>
+                        </div>
+                    </a>`;
+            }
         }
 
         function renderPosts(categoryFilter = 'All') {
