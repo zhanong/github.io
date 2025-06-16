@@ -2,7 +2,8 @@
 title: ' '
 ---
 
-<img src="img/logo.png" style="margin-bottom: 10px; width: 150px;">
+
+<img src="img/logo.png" style="align: center; margin-bottom: 4em; width: 7em;">
 
 Hi! Welcome to the **Flying Island**. A floating island where I built my own stuff.
 
