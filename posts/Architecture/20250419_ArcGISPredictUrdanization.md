@@ -14,7 +14,7 @@ There are various ways to predict urbanization. You could base it on administrat
 1. It aligned well with the resolution of the data I could find.
 2. It kept the computation time manageable.
 3. It's a size large enough to represent the average conditions of an area.
-4. 
+
 ![](img/20250419_grid.png)
 
 Urbanization in the Pearl River Delta looked very different before and after 2010. Based on the data available, I decided to use data from 2010 as the **features** for my model and the population density from 2020 as the **target**.
