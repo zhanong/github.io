@@ -20,4 +20,10 @@ The main challenges were twofold. The first was designing specifically for modul
 ![](img/20160530/perspectiveSection.png)
 ![](img/20160530/construction.png)
 
+<figure>
+<img src = "img/20160530/perspectiveSection.png">
+<figcaption> This is a picture.
+</figcaption>
+</figure>
+
 
