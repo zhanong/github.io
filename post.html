@@ -35,125 +35,129 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
 
-    <script defer>
-        async function loadHeader() {
-            try {
-                const response = await fetch('includes/header.html');
-                const headerHTML = await response.text();
-                document.getElementById('header-placeholder').innerHTML = headerHTML;
-            } catch (error) {
-                console.error('Error loading header:', error);
-            }
+<script defer>
+    async function loadHeader() {
+        try {
+            const response = await fetch('includes/header.html');
+            const headerHTML = await response.text();
+            document.getElementById('header-placeholder').innerHTML = headerHTML;
+        } catch (error) {
+            console.error('Error loading header:', error);
+        }
+    }
+
+    async function loadPost() {
+        const container = document.getElementById('post-container');
+
+        function rewriteRelativeImagePaths(markdownBody, baseUrl) {
+            const imageRegex = /!\[(.*?)\]\((?!https?:\/\/)(.*?)\)/g;
+            return markdownBody.replace(imageRegex, (match, altText, imagePath) => {
+                const fullUrl = new URL(imagePath, baseUrl).href;
+                return `![${altText}](${fullUrl})`;
+            });
         }
 
-        async function loadPost() {
-            const container = document.getElementById('post-container');
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const externalUrl = urlParams.get('url');
+            const postPath = urlParams.get('path');
 
-            function rewriteRelativeImagePaths(markdownBody, baseUrl) {
-                const imageRegex = /!\[(.*?)\]\((?!https?:\/\/)(.*?)\)/g;
-                return markdownBody.replace(imageRegex, (match, altText, imagePath) => {
-                    const fullUrl = new URL(imagePath, baseUrl).href;
-                    return `![${altText}](${fullUrl})`;
-                });
+            let displayTitle, displayDate, contentBody;
+
+            if (externalUrl) {
+                displayTitle = urlParams.get('title');
+                displayDate = urlParams.get('date');
+                const response = await fetch(externalUrl);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch content from external URL: ${externalUrl}`);
+                }
+                const externalMarkdown = await response.text();
+                let { body } = parseFrontMatter(externalMarkdown);
+                contentBody = rewriteRelativeImagePaths(body, externalUrl);
+            } else if (postPath) {
+                const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+                const fileData = await response.json();
+                const markdownContent = atob(fileData.content);
+                const { attributes, body } = parseFrontMatter(markdownContent);
+                displayTitle = attributes.title;
+                displayDate = attributes.date;
+                contentBody = body;
+            } else {
+                throw new Error("No post path or URL specified.");
             }
 
-            try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const externalUrl = urlParams.get('url');
-                const postPath = urlParams.get('path');
+            if (displayTitle) {
+                document.title = `${displayTitle} | Flying Island`;
+            }
 
-                let displayTitle, displayDate, contentBody;
+            // START OF FINAL RENDERER
+            const renderer = new marked.Renderer();
+            const siteBaseUrl = `https://zhanong.github.io/`;
 
-                if (externalUrl) {
-                    displayTitle = urlParams.get('title');
-                    displayDate = urlParams.get('date');
-                    const response = await fetch(externalUrl);
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch content from external URL: ${externalUrl}`);
-                    }
-                    const externalMarkdown = await response.text();
-                    let { body } = parseFrontMatter(externalMarkdown);
-                    contentBody = rewriteRelativeImagePaths(body, externalUrl);
-                } else if (postPath) {
-                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
-                    const response = await fetch(apiUrl);
-                    if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-                    const fileData = await response.json();
-                    const markdownContent = atob(fileData.content);
-                    const { attributes, body } = parseFrontMatter(markdownContent);
-                    displayTitle = attributes.title;
-                    displayDate = attributes.date;
-                    contentBody = body;
+            renderer.image = (href, title, text) => {
+                let imageHref, imageText;
+
+                // The log revealed that marked.js passes a single object.
+                // This code handles that case by extracting the properties from it.
+                if (href && typeof href === 'object' && href.href) {
+                    imageHref = href.href;
+                    imageText = href.text;
                 } else {
-                    throw new Error("No post path or URL specified.");
+                    // This is a fallback for the standard renderer signature.
+                    imageHref = href;
+                    imageText = text;
                 }
 
-                if (displayTitle) {
-                    document.title = `${displayTitle} | Flying Island`;
+                let finalHref = '#'; // Default to a safe value
+
+                // Process the extracted href string
+                if (imageHref && typeof imageHref === 'string') {
+                    finalHref = imageHref; // Start with the original href
+                    if (!imageHref.startsWith('http')) {
+                        finalHref = new URL(imageHref, siteBaseUrl).href;
+                    }
                 }
 
-                // START OF DEBUGGING RENDERER
-                const renderer = new marked.Renderer();
-                const siteBaseUrl = `https://zhanong.github.io/`;
+                // Create a captioned image card if there is alt text
+                if (imageText) {
+                    return `
+                    <figure class="image-card">
+                        <img src="${finalHref}" alt="${imageText}" />
+                        <figcaption class="image-caption">${imageText}</figcaption>
+                    </figure>
+                    `;
+                }
+                
+                // Otherwise, return a standard image
+                return `<img src="${finalHref}" alt="" />`;
+            };
+            // END OF FINAL RENDERER
 
-                renderer.image = (href, title, text) => {
-                    // --- LOGGING ---
-                    // This will print the details of every image tag to the console.
-                    console.log('--- MARKED RENDERER: IMAGE ---');
-                    console.log('HREF:', href, '| TYPE:', typeof href);
-                    console.log('TITLE:', title, '| TYPE:', typeof title);
-                    console.log('TEXT:', text, '| TYPE:', typeof text);
-                    console.log('------------------------------');
+            const postHTML = marked.parse(contentBody, { renderer });
 
-                    let finalHref = href;
+            container.innerHTML = `
+                <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
+                <p class="text-slate-500 mb-8">${displayDate || ''}</p>
+                <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
+            `;
 
-                    // Robust check to ensure href is a usable string
-                    if (href && typeof href === 'string') {
-                        if (!href.startsWith('http')) {
-                            finalHref = new URL(href, siteBaseUrl).href;
-                        }
-                    } else {
-                        // If href is invalid, use a placeholder to prevent a crash
-                        finalHref = '#'; 
-                    }
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
 
-                    // Create captioned image card if there is alt text
-                    if (text) {
-                        return `
-                        <figure class="image-card">
-                            <img src="${finalHref}" alt="${text}" />
-                            <figcaption class="image-caption">${text}</figcaption>
-                        </figure>
-                        `;
-                    }
-                    // Otherwise, return a standard image
-                    return `<img src="${finalHref}" alt="" />`;
-                };
-                // END OF DEBUGGING RENDERER
-
-                const postHTML = marked.parse(contentBody, { renderer });
-
-                container.innerHTML = `
-                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
-                    <p class="text-slate-500 mb-8">${displayDate || ''}</p>
-                    <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
-                `;
-
-                document.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightElement(block);
-                });
-
-            } catch (error) {
-                console.error('Error loading post:', error);
-                container.innerHTML = `<p class="text-red-500">Could not load post. Check console for details.</p>`;
-            }
+        } catch (error) {
+            console.error('Error loading post:', error);
+            container.innerHTML = `<p class="text-red-500">Could not load post. Check console for details.</p>`;
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            await loadHeader();
-            await loadPost();
-        });
-    </script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadHeader();
+        await loadPost();
+    });
+</script>
 
 </body>
 
