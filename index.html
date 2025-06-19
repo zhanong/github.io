@@ -98,7 +98,6 @@
             `).join('');
         }
 
-        // --- vvv REPLACE THE createPostCard FUNCTION WITH THIS vvv ---
         function createPostCard(post) {
             const { title, summary, featureImage, date, link, tags } = post.attributes;
             const categoryStyle = post.categoryConfig || { colorClass: 'bg-white', textColor: 'text-slate-800' };
@@ -115,7 +114,7 @@
                 const tagList = tags.split(',').map(tag => tag.trim());
                 const tagSpans = tagList.map(tagName => {
                     const style = tagsConfig[tagName] || tagsConfig['default'];
-                    return `<span class="inline-block ${style.backgroundColor} ${style.textColor} text-xs font-semibold mr-1 mb-1 px-2 py-0.5 rounded-full">${tagName}</span>`;
+                    return `<span class="inline-block ${style.backgroundColor} ${style.textColor} text-xs mr-1 mb-1 px-2 py-0.5 rounded-full">${tagName}</span>`;
                 }).join('');
                 tagsHTML = `<div class="mt-2">${tagSpans}</div>`;
             }
@@ -138,7 +137,6 @@
                 </a>
             `;
         }
-        // --- ^^^ END OF REPLACEMENT ^^^ ---
 
         function renderPosts(categoryFilter = 'All') {
             const container = document.getElementById('posts-container');

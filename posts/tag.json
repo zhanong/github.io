@@ -24,12 +24,12 @@
     "textColor": "text-pink-300"
   },
   "DevLog": {
-    "backgroundColor": "bg-gray-300",
-    "textColor": "text-gray-800"
+    "backgroundColor": "bg-orange-100",
+    "textColor": "text-orange-300"
   },
   "LlamaFactory": {
-    "backgroundColor": "bg-red-100",
-    "textColor": "text-red-300"
+    "backgroundColor": "bg-lime-100",
+    "textColor": "text-lime-300"
   },
   "default": {
     "backgroundColor": "bg-slate-100",
