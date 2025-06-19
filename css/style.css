@@ -274,6 +274,7 @@ body {
 /* * Removes default styling from the image when it's inside our card. 
  */
 .post-content .image-card img {
+    width: 100%; /* <-- ADDED THIS LINE */
     max-width: 100%;
     height: auto;
     display: block; /* Removes bottom space */
