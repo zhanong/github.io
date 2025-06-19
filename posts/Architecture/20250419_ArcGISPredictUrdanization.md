@@ -2,7 +2,7 @@
 title: Predict Urbanization using ArcGIS and Machine Learning 
 date: 2025-04-19
 featureImage: img/20250419_cover.png
-tags: ArcGIS, Python, MachineLearning
+tags: ArcGIS, Python, ML
 ---
 I find that the best way to learn a new tool is by finishing a small, interesting project. To get comfortable with ArcGIS, I came up with a project to model and predict urbanization. I used ArcGIS to prepare the geospatial data and, later, to visualize the model's predictions.
 
