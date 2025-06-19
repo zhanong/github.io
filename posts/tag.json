@@ -31,6 +31,18 @@
     "backgroundColor": "bg-lime-100",
     "textColor": "text-lime-300"
   },
+  "Design": {
+    "backgroundColor": "bg-gray-100",
+    "textColor": "text-gray-400"
+  },
+  "Vray": {
+    "backgroundColor": "bg-teal-100",
+    "textColor": "text-teal-300"
+  },
+  "Rhino": {
+    "backgroundColor": "bg-cyan-100",
+    "textColor": "text-cyan-300"
+  },
   "default": {
     "backgroundColor": "bg-slate-100",
     "textColor": "text-slate-300"
