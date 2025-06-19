@@ -1,7 +1,7 @@
 ---
 title: House with a Bath
 date: 2017-03-15
-featureImage: img/20170315_cover.png
+featureImage: img/20170315/cover.png
 tags: Design, Vray, Rhino
 ---
 ![](img/20170315/cover.png)
