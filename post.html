@@ -98,7 +98,7 @@
 
                     const { attributes, body } = parseFrontMatter(markdownContent);
                     displayTitle = attributes.title;
-                    displayDate = attributes.date; // <-- Bug fix: was attributes.Date
+                    displayDate = attributes.Date;
                     contentBody = body;
                 } else {
                     throw new Error("No post path or URL specified.");
@@ -108,23 +108,6 @@
                 if (displayTitle) {
                     document.title = `${displayTitle} | Flying Island`;
                 }
-
-                // --- Start of Customization ---
-                const renderer = new marked.Renderer();
-                renderer.image = (href, title, text) => {
-                    let caption = '';
-                    if (text) {
-                        caption = `<figcaption class="text-center text-sm text-slate-500 mt-2 italic">${text}</figcaption>`;
-                    }
-                    return `
-                        <figure>
-                            <img src="${href}" alt="${text}" title="${title || ''}">
-                            ${caption}
-                        </figure>
-                    `;
-                };
-                marked.use({ renderer });
-                // --- End of Customization ---
                 
                 const postHTML = marked.parse(contentBody);
 
