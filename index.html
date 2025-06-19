@@ -19,9 +19,7 @@
 
         <div id="header-placeholder"></div>
 
-        <div class="content-gradient p-6 sm:p-12 rounded-2xl shadow-2xl"> <!-- content background -->
-            <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> <!-- grid -->
-                <div id="loading-indicator" class="col-span-full text-center">
+        <div class="content-gradient p-6 sm:p-12 rounded-2xl shadow-2xl"> <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> <div id="loading-indicator" class="col-span-full text-center">
                     <div class="loader"></div>
                     <p class="text-slate-600">Loading posts...</p>
                 </div>
@@ -34,6 +32,7 @@
     <script>
         let allPosts = [];
         let categoriesConfig = [];
+        let tagsConfig = {}; // <-- Add this line
 
         async function loadHeader() {
             try {
@@ -59,6 +58,18 @@
                 container.innerHTML = `<p class="col-span-full text-center text-red-500">Error: Could not load site configuration.</p>`;
             }
         }
+        
+        // --- vvv ADD THIS NEW FUNCTION vvv ---
+        async function loadTagsConfig() {
+            try {
+                const response = await fetch('posts/tag.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                tagsConfig = await response.json();
+            } catch (error) {
+                console.warn("Could not load 'posts/tag.json'. Tags will use default styles.", error);
+            }
+        }
+        // --- ^^^ END OF NEW FUNCTION ^^^ ---
 
         function generateAboutButton() {
             const navPlaceholder = document.getElementById('nav-placeholder');
@@ -87,8 +98,9 @@
             `).join('');
         }
 
+        // --- vvv REPLACE THE createPostCard FUNCTION WITH THIS vvv ---
         function createPostCard(post) {
-            const { title, summary, featureImage, date, link } = post.attributes;
+            const { title, summary, featureImage, date, link, tags } = post.attributes;
             const categoryStyle = post.categoryConfig || { colorClass: 'bg-white', textColor: 'text-slate-800' };
 
             let postUrl;
@@ -98,26 +110,35 @@
                 postUrl = `post.html?path=${post.path}`;
             }
 
-            let postCard = `
-                        <a href="${postUrl}" class="block ${categoryStyle.colorClass} ${categoryStyle.textColor} rounded-lg shadow-md card-hover overflow-hidden flex flex-col">
-                        <div class="p-4">
-                            <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
-                            <p class="text-xs ${categoryStyle.textColor} opacity-75">${date || ''}</p>
-                        </div>
-                        `;
-
-            if (featureImage) {
-                postCard += `
-                        <img src="${featureImage}" alt="${title || ''}" class="w-full h-48 opacity-75 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    </a>`;
-            } else {
-                postCard += `
-                        <div class="text-sm font-light p-4">${summary || ''}</div>
-                    </a>`;
+            let tagsHTML = '';
+            if (tags && typeof tags === 'string') {
+                const tagList = tags.split(',').map(tag => tag.trim());
+                const tagSpans = tagList.map(tagName => {
+                    const style = tagsConfig[tagName] || tagsConfig['default'];
+                    return `<span class="inline-block ${style.backgroundColor} ${style.textColor} text-xs font-semibold mr-1 mb-1 px-2 py-0.5 rounded-full">${tagName}</span>`;
+                }).join('');
+                tagsHTML = `<div class="mt-2">${tagSpans}</div>`;
             }
 
-            return postCard;
+            let postContent = '';
+            if (featureImage) {
+                postContent = `<img src="${featureImage}" alt="${title || ''}" class="w-full h-48 opacity-75 object-cover" onerror="this.style.display='none';">`;
+            } else {
+                postContent = `<div class="text-sm font-light p-4 pt-0 flex-grow">${summary || ''}</div>`;
+            }
+
+            return `
+                <a href="${postUrl}" class="block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col h-full">
+                    <div class="p-4">
+                        <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
+                        <p class="text-xs ${categoryStyle.textColor} opacity-75">${date || ''}</p>
+                        ${tagsHTML}
+                    </div>
+                    ${postContent}
+                </a>
+            `;
         }
+        // --- ^^^ END OF REPLACEMENT ^^^ ---
 
         function renderPosts(categoryFilter = 'All') {
             const container = document.getElementById('posts-container');
@@ -187,6 +208,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             await loadHeader();
             await loadConfig();
+            await loadTagsConfig(); // <-- Add this line
             generateAboutButton();
             generateCategoryButtons();
             setupEventListeners();

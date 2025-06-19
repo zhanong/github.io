@@ -2,6 +2,7 @@
 title: 2ooo People Take Lifts At the Same Time In Unity ECS
 date: 2024-08-19
 featureImage: img/2000PeopleLift.png
+tags: Unity, ECS
 ---
 
 <div class="video-container">

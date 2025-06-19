@@ -2,6 +2,7 @@
 title: Section Architect | Intro
 date: 2025-06-01
 featureImage: img/SectionArchitectCover.jpg
+tags: Unity, DevLog
 ---
 
 <div class="video-container">

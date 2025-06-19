@@ -2,6 +2,7 @@
 title: Tuning Deepseek LoRa for Stylized Article
 date: 2025-04-30
 featureImage: img/20250430_cover.png
+tags: Python, 
 ---
 
 <div class="video-container">
