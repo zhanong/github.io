@@ -108,8 +108,23 @@
                 if (displayTitle) {
                     document.title = `${displayTitle} | Flying Island`;
                 }
-                
-                const postHTML = marked.parse(contentBody);
+
+                const renderer = new marked.Renderer();
+                renderer.image = (href, title, text) => {
+                    // If the image has alt text (text), create a figure and figcaption
+                    if (text) {
+                        return `
+                    <figure class="image-card">
+                        <img src="${href}" alt="${text}" />
+                        <figcaption class="image-caption">${text}</figcaption>
+                    </figure>
+                    `;
+                    }
+                    // Otherwise, return a standard image tag
+                    return `<img src="${href}" alt="" />`;
+                };
+
+                const postHTML = marked.parse(contentBody, { renderer });
 
                 container.innerHTML = `
                     <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>

@@ -13,17 +13,11 @@ During the first half of the workshop, we collaborated on a detailed investigati
 
 My proposal is a library located on the island's northeastern shore. The concept of placing a structure on a desert island using modular methods reminded me of a spaceship landing in an unfamiliar place. This inspired the use of a triangle as a recurring motif, chosen for its distinct geometric identity and its potential to create unique spatial experiences.
 
+![](img/20160530/perspectiveSection.png)
 
 
 The main challenges were twofold. The first was designing specifically for modularity, where the construction process itself is a primary consideration. The second was addressing the island's lack of infrastructure, making the acquisition and conservation of water and power a top priority for the proposal.
 
-![](img/20160530/perspectiveSection.png)
 ![](img/20160530/construction.png)
-
-<figure>
-<img src = "img/20160530/perspectiveSection.png">
-<figcaption> This is a picture.
-</figcaption>
-</figure>
 
 

@@ -4,7 +4,7 @@ date: 2017-03-15
 featureImage: img/20170315/cover.png
 tags: Design, Vray, Rhino
 ---
-![](img/20170315/cover.png)
+![this is a caption](img/20170315/cover.png)
 
 For a Tokyo Institute of Technology project, we designed a low-cost vacation home on Ogishima island, where a unique bathing culture promotes community sharing. The challenge was to renovate an old barn on a tight budget without heavy machinery, creating a space that balanced the owners' privacy with the island's communal customs.
 

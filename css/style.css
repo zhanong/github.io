@@ -259,3 +259,29 @@ body {
   border-radius: 8px;   /* Optional: gives images slightly rounded corners */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Optional: adds a subtle shadow for depth */
 }
+
+.post-content .image-card {
+    /* This container doesn't need its own margins, as the existing
+       '.post-content img' rule will apply to the image inside it. */
+    margin: 0;
+    padding: 0;
+}
+
+/* For an image inside our card, we override the bottom margin
+   to keep the caption close to it. */
+.post-content .image-card img {
+    margin-bottom: 0; /* Removes the space between the image and the caption */
+}
+
+/* The caption text styling */
+.post-content .image-caption {
+    display: block;
+    text-align: center;
+    padding: 0.75em 1em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%; /* Makes the caption slightly narrower than the image */
+    font-size: 0.9rem;
+    color: #475569; /* slate-600 */
+    font-style: italic;
+}
