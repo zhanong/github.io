@@ -1,27 +1,27 @@
 {
   "Unity": {
     "backgroundColor": "bg-green-50",
-    "textColor": "text-green-150"
+    "textColor": "text-green-200"
   },
   "ECS": {
     "backgroundColor": "bg-yellow-50",
-    "textColor": "text-yellow-150"
+    "textColor": "text-yellow-200"
   },
   "AI": {
     "backgroundColor": "bg-blue-50",
-    "textColor": "text-blue-150"
+    "textColor": "text-blue-200"
   },
   "ArcGIS": {
     "backgroundColor": "bg-indigo-50",
-    "textColor": "text-indigo-150"
+    "textColor": "text-indigo-200"
   },
   "Python": {
     "backgroundColor": "bg-purple-50",
-    "textColor": "text-purple-150"
+    "textColor": "text-purple-200"
   },
   "ML": {
     "backgroundColor": "bg-pink-50",
-    "textColor": "text-pink-150"
+    "textColor": "text-pink-200"
   },
   "DevLog": {
     "backgroundColor": "bg-gray-200",
@@ -29,10 +29,10 @@
   },
   "LlamaFactory": {
     "backgroundColor": "bg-red-50",
-    "textColor": "text-red-150"
+    "textColor": "text-red-200"
   },
   "default": {
     "backgroundColor": "bg-slate-50",
-    "textColor": "text-slate-150"
+    "textColor": "text-slate-200"
   }
 }
