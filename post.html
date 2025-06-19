@@ -92,13 +92,13 @@
                     document.title = `${displayTitle} | Flying Island`;
                 }
 
-                // START OF DEBUGGING RENDERER
+                // START OF FINAL FIX
                 const renderer = new marked.Renderer();
-                const siteBaseUrl = `https://zhanong.github.io/`;
-
+                
                 renderer.image = (href, title, text) => {
                     let imageHref, imageText;
 
+                    // Handle the case where marked.js passes an object
                     if (href && typeof href === 'object' && href.href) {
                         imageHref = href.href;
                         imageText = href.text;
@@ -107,18 +107,11 @@
                         imageText = text;
                     }
 
-                    let finalHref = '#'; 
-                    console.log(`[DEBUG] Initial Href:`, imageHref); // LOG 1
+                    // Use the relative path directly. The browser will resolve it
+                    // relative to the current page (post.html), which is correct.
+                    const finalHref = imageHref || '#';
 
-                    if (imageHref && typeof imageHref === 'string') {
-                        finalHref = imageHref; 
-                        if (!imageHref.startsWith('http')) {
-                            console.log(`[DEBUG] Path is relative. Base URL is:`, siteBaseUrl); // LOG 2
-                            finalHref = new URL(imageHref, siteBaseUrl).href;
-                        }
-                    }
-                    console.log(`[DEBUG] Final Generated URL:`, finalHref); // LOG 3
-
+                    // Create captioned image card if there is alt text
                     if (imageText) {
                         return `
                         <figure class="image-card">
@@ -128,9 +121,10 @@
                         `;
                     }
                     
+                    // Otherwise, return a standard image
                     return `<img src="${finalHref}" alt="" />`;
                 };
-                // END OF DEBUGGING RENDERER
+                // END OF FINAL FIX
 
                 const postHTML = marked.parse(contentBody, { renderer });
 
