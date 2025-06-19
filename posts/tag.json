@@ -1,38 +1,38 @@
 {
   "Unity": {
-    "backgroundColor": "bg-green-100",
-    "textColor": "text-green-500"
+    "backgroundColor": "bg-green-50",
+    "textColor": "text-green-150"
   },
   "ECS": {
-    "backgroundColor": "bg-yellow-100",
-    "textColor": "text-yellow-500"
+    "backgroundColor": "bg-yellow-50",
+    "textColor": "text-yellow-150"
   },
   "AI": {
-    "backgroundColor": "bg-blue-100",
-    "textColor": "text-blue-500"
+    "backgroundColor": "bg-blue-50",
+    "textColor": "text-blue-150"
   },
   "ArcGIS": {
-    "backgroundColor": "bg-indigo-100",
-    "textColor": "text-indigo-500"
+    "backgroundColor": "bg-indigo-50",
+    "textColor": "text-indigo-150"
   },
   "Python": {
-    "backgroundColor": "bg-purple-100",
-    "textColor": "text-purple-500"
+    "backgroundColor": "bg-purple-50",
+    "textColor": "text-purple-150"
   },
   "ML": {
-    "backgroundColor": "bg-pink-100",
-    "textColor": "text-pink-500"
+    "backgroundColor": "bg-pink-50",
+    "textColor": "text-pink-150"
   },
   "DevLog": {
     "backgroundColor": "bg-gray-200",
     "textColor": "text-gray-800"
   },
   "LlamaFactory": {
-    "backgroundColor": "bg-red-100",
-    "textColor": "text-red-500"
+    "backgroundColor": "bg-red-50",
+    "textColor": "text-red-150"
   },
   "default": {
-    "backgroundColor": "bg-slate-100",
-    "textColor": "text-slate-500"
+    "backgroundColor": "bg-slate-50",
+    "textColor": "text-slate-150"
   }
 }
