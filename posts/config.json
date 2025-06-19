@@ -9,20 +9,20 @@
     "name": "Game",
     "folder": "Game",
     "colorClass": "bg-white",
-    "textColor": "text-[#63429a]"
+    "textColor": "text-[#723fc8]"
   },
 
   {
     "name": "Tech",
     "folder": "Tech",
     "colorClass": "bg-white",
-    "textColor": "text-[#3771ba]"
+    "textColor": "text-[#2474d9]"
   },
 
   {
     "name": "Architecture",
     "folder": "Architecture",
     "colorClass": "bg-white",
-    "textColor": "text-[#2b2b2b]"
+    "textColor": "text-[#33a166]"
   }
 ]
