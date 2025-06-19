@@ -49,18 +49,9 @@
         async function loadPost() {
             const container = document.getElementById('post-container');
 
-            /**
-             * A helper function to rewrite relative image paths in Markdown.
-             * @param {string} markdownBody - The body of the markdown file.
-             * @param {string} baseUrl - The base URL of the repository folder where the file resides.
-             * @returns {string} Markdown with absolute image paths.
-             */
             function rewriteRelativeImagePaths(markdownBody, baseUrl) {
-                // This regex finds all markdown images: ![alt text](path)
                 const imageRegex = /!\[(.*?)\]\((?!https?:\/\/)(.*?)\)/g;
-
                 return markdownBody.replace(imageRegex, (match, altText, imagePath) => {
-                    // Create a full URL, ensuring no double slashes.
                     const fullUrl = new URL(imagePath, baseUrl).href;
                     return `![${altText}](${fullUrl})`;
                 });
@@ -74,55 +65,50 @@
                 let displayTitle, displayDate, contentBody;
 
                 if (externalUrl) {
-                    // --- EXTERNAL POST LOGIC ---
                     displayTitle = urlParams.get('title');
                     displayDate = urlParams.get('date');
-
                     const response = await fetch(externalUrl);
                     if (!response.ok) {
                         throw new Error(`Failed to fetch content from external URL: ${externalUrl}`);
                     }
                     const externalMarkdown = await response.text();
                     let { body } = parseFrontMatter(externalMarkdown);
-
                     contentBody = rewriteRelativeImagePaths(body, externalUrl);
-
                 } else if (postPath) {
-
                     const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
                     const response = await fetch(apiUrl);
                     if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-
                     const fileData = await response.json();
                     const markdownContent = atob(fileData.content);
-
                     const { attributes, body } = parseFrontMatter(markdownContent);
                     displayTitle = attributes.title;
-                    displayDate = attributes.date; // Note: 'date' in your .md files is lowercase
+                    displayDate = attributes.date;
                     contentBody = body;
                 } else {
                     throw new Error("No post path or URL specified.");
                 }
 
-                // --- RENDER THE PAGE (unified for both post types) ---
                 if (displayTitle) {
                     document.title = `${displayTitle} | Flying Island`;
                 }
 
-                // START OF NEW/IMPROVED RENDERER
+                // START OF FINAL RENDERER CODE
                 const renderer = new marked.Renderer();
-                // Construct the base URL for your deployed GitHub Pages site.
                 const siteBaseUrl = `https://zhanong.github.io/`;
 
                 renderer.image = (href, title, text) => {
                     let finalHref = href;
-                    // If the href is a relative path (doesn't start with http),
-                    // convert it to an absolute URL.
-                    if (!href.startsWith('http')) {
-                        finalHref = new URL(href, siteBaseUrl).href;
+
+                    // DEFENSIVE CHECK: Make sure href is a valid string before processing it.
+                    if (href && typeof href === 'string') {
+                        if (!href.startsWith('http')) {
+                            finalHref = new URL(href, siteBaseUrl).href;
+                        }
+                    } else {
+                        // If href is not a valid string, use a placeholder to prevent crashing.
+                        finalHref = '#';
                     }
 
-                    // If there is alt text, create a captioned image card.
                     if (text) {
                         return `
                     <figure class="image-card">
@@ -131,10 +117,9 @@
                     </figure>
                     `;
                     }
-                    // Otherwise, return a standard image.
                     return `<img src="${finalHref}" alt="" />`;
                 };
-                // END OF NEW/IMPROVED RENDERER
+                // END OF FINAL RENDERER CODE
 
                 const postHTML = marked.parse(contentBody, { renderer });
 
