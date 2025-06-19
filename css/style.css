@@ -244,44 +244,52 @@ body {
     border: 0;
 }
 
-/*
- * This styles images within the main post content area.
- * It makes them responsive and centers them with some styling.
+/* --- START: IMAGE AND CAPTION STYLES --- 
+*/
+
+/* * Styles for regular (un-captioned) images. 
+ * This ensures they still look like cards, just as they did before.
  */
-.post-content img {
-  max-width: 100%;      /* Ensures images never overflow their container */
-  height: auto;         /* Maintains the image's original aspect ratio */
-  display: block;       /* Allows centering via margin */
-  margin-left: auto;    /* Centers the image horizontally */
-  margin-right: auto;   /* Centers the image horizontally */
-  margin-top: 2em;      /* Adds some space above the image */
-  margin-bottom: 2em;   /* Adds some space below the image */
-  border-radius: 8px;   /* Optional: gives images slightly rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Optional: adds a subtle shadow for depth */
-}
-
-.post-content .image-card {
-    /* This container doesn't need its own margins, as the existing
-       '.post-content img' rule will apply to the image inside it. */
-    margin: 0;
-    padding: 0;
-}
-
-/* For an image inside our card, we override the bottom margin
-   to keep the caption close to it. */
-.post-content .image-card img {
-    margin-bottom: 0; /* Removes the space between the image and the caption */
-}
-
-/* The caption text styling */
-.post-content .image-caption {
+.post-content > img, .post-content p > img {
+    max-width: 100%;
+    height: auto;
     display: block;
-    text-align: center;
+    margin: 2em auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* * Styles for the captioned image card container (<figure>).
+ * This is now the element that has the shadow and border, wrapping everything.
+ */
+.post-content .image-card {
+    max-width: 100%;
+    margin: 2em auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* Crucial for containing the rounded corners */
+    background-color: #f8fafc; /* Sets a background for the caption area */
+}
+
+/* * Removes default styling from the image when it's inside our card. 
+ */
+.post-content .image-card img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Removes bottom space */
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* * Styles the caption text inside the card.
+ */
+.post-content .image-card .image-caption {
     padding: 0.75em 1em;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 90%; /* Makes the caption slightly narrower than the image */
+    text-align: center;
     font-size: 0.9rem;
-    color: #475569; /* slate-600 */
+    color: #475569;
     font-style: italic;
 }
+/* --- END: IMAGE AND CAPTION STYLES --- 
+*/
