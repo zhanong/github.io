@@ -92,42 +92,52 @@
                     document.title = `${displayTitle} | Flying Island`;
                 }
 
-                // START OF FINAL RENDERER CODE
+                // START OF DEBUGGING RENDERER
                 const renderer = new marked.Renderer();
                 const siteBaseUrl = `https://zhanong.github.io/`;
 
                 renderer.image = (href, title, text) => {
+                    // --- LOGGING ---
+                    // This will print the details of every image tag to the console.
+                    console.log('--- MARKED RENDERER: IMAGE ---');
+                    console.log('HREF:', href, '| TYPE:', typeof href);
+                    console.log('TITLE:', title, '| TYPE:', typeof title);
+                    console.log('TEXT:', text, '| TYPE:', typeof text);
+                    console.log('------------------------------');
+
                     let finalHref = href;
 
-                    // DEFENSIVE CHECK: Make sure href is a valid string before processing it.
+                    // Robust check to ensure href is a usable string
                     if (href && typeof href === 'string') {
                         if (!href.startsWith('http')) {
                             finalHref = new URL(href, siteBaseUrl).href;
                         }
                     } else {
-                        // If href is not a valid string, use a placeholder to prevent crashing.
-                        finalHref = '#';
+                        // If href is invalid, use a placeholder to prevent a crash
+                        finalHref = '#'; 
                     }
 
+                    // Create captioned image card if there is alt text
                     if (text) {
                         return `
-                    <figure class="image-card">
-                        <img src="${finalHref}" alt="${text}" />
-                        <figcaption class="image-caption">${text}</figcaption>
-                    </figure>
-                    `;
+                        <figure class="image-card">
+                            <img src="${finalHref}" alt="${text}" />
+                            <figcaption class="image-caption">${text}</figcaption>
+                        </figure>
+                        `;
                     }
+                    // Otherwise, return a standard image
                     return `<img src="${finalHref}" alt="" />`;
                 };
-                // END OF FINAL RENDERER CODE
+                // END OF DEBUGGING RENDERER
 
                 const postHTML = marked.parse(contentBody, { renderer });
 
                 container.innerHTML = `
-                <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
-                <p class="text-slate-500 mb-8">${displayDate || ''}</p>
-                <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
-            `;
+                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
+                    <p class="text-slate-500 mb-8">${displayDate || ''}</p>
+                    <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
+                `;
 
                 document.querySelectorAll('pre code').forEach((block) => {
                     hljs.highlightElement(block);
