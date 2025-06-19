@@ -108,6 +108,20 @@
                 if (displayTitle) {
                     document.title = `${displayTitle} | Flying Island`;
                 }
+                
+                // IMAGE CAPTION HANDLING
+                const renderer = new marked.Renderer();
+                renderer.image = (href, title, text) => {
+                    // Use the alt text (text) as the caption
+                    return `
+                        <figure>
+                        <img src="<span class="math-inline">\{href\}" alt\="</span>{text}">
+                        <figcaption>${text}</figcaption>
+                        </figure>
+                    `;
+                };
+                marked.use({ renderer });
+
                 const postHTML = marked.parse(contentBody);
 
                 container.innerHTML = `

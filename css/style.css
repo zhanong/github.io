@@ -245,17 +245,25 @@ body {
 }
 
 /*
- * This styles images within the main post content area.
- * It makes them responsive and centers them with some styling.
- */
-.post-content img {
+* Styles for images within posts, now using <figure> and <figcaption>
+* for proper captions.
+*/
+.post-content figure {
+  margin: 2em auto; /* Adds vertical space and centers the whole figure */
+  text-align: center; /* Centers the image and caption text within the figure */
+}
+
+.post-content figure img {
   max-width: 100%;      /* Ensures images never overflow their container */
   height: auto;         /* Maintains the image's original aspect ratio */
-  display: block;       /* Allows centering via margin */
-  margin-left: auto;    /* Centers the image horizontally */
-  margin-right: auto;   /* Centers the image horizontally */
-  margin-top: 2em;      /* Adds some space above the image */
-  margin-bottom: 2em;   /* Adds some space below the image */
+  display: inline-block;/* Ensures the block can be centered by its parent */
   border-radius: 8px;   /* Optional: gives images slightly rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Optional: adds a subtle shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Optional: adds a subtle shadow */
+}
+
+.post-content figcaption {
+  margin-top: 0.8em;      /* Space between the image and the caption text */
+  font-size: 0.9rem;      /* Makes the caption text slightly smaller */
+  color: #52525b;         /* A nice, readable dark gray for the caption */
+  font-style: italic;     /* Italicizes the caption text */
 }

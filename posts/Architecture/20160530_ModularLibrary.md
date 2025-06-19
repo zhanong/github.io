@@ -1,7 +1,7 @@
 ---
-title: House with a Bath
-date: 2017-03-15
-featureImage: img/20170315_cover.png
+title: Modular Library
+date: 2016-05-30
+featureImage: img/20160530_cover.png
 tags: Design, Vray, Rhino
 ---
 ![](img/20170315/cover.png)
@@ -14,6 +14,6 @@ Our solution is a versatile corridor built with salvaged materials. Using adjust
 
 ![](img/20170315/plan.png)
 
-![](img/20170315/scenario.png)
+![asdasdas](img/20170315/scenario.png)
 
 
