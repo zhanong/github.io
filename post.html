@@ -109,18 +109,6 @@
                     document.title = `${displayTitle} | Flying Island`;
                 }
                 
-                // IMAGE CAPTION HANDLING
-                const renderer = new marked.Renderer();
-                renderer.image = function(href, title, text) {
-                return (
-                    '<figure>' +
-                    '<img src="' + href + '" alt="' + text + '">' +
-                    '<figcaption>' + text + '</figcaption>' +
-                    '</figure>'
-                );
-                };
-                marked.use({ renderer });
-
                 const postHTML = marked.parse(contentBody);
 
                 container.innerHTML = `
