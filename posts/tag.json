@@ -1,50 +1,50 @@
 {
   "Unity": {
     "backgroundColor": "bg-green-100",
-    "textColor": "text-green-300"
+    "textColor": "text-white"
   },
   "ECS": {
     "backgroundColor": "bg-yellow-100",
-    "textColor": "text-yellow-300"
+    "textColor": "text-white"
   },
   "AI": {
     "backgroundColor": "bg-blue-100",
-    "textColor": "text-blue-300"
+    "textColor": "text-white"
   },
   "ArcGIS": {
     "backgroundColor": "bg-indigo-100",
-    "textColor": "text-indigo-300"
+    "textColor": "text-white"
   },
   "Python": {
     "backgroundColor": "bg-purple-100",
-    "textColor": "text-purple-300"
+    "textColor": "text-white"
   },
   "ML": {
     "backgroundColor": "bg-pink-100",
-    "textColor": "text-pink-300"
+    "textColor": "text-white"
   },
   "DevLog": {
     "backgroundColor": "bg-orange-100",
-    "textColor": "text-orange-300"
+    "textColor": "text-white"
   },
   "LlamaFactory": {
     "backgroundColor": "bg-lime-100",
-    "textColor": "text-lime-300"
+    "textColor": "text-white"
   },
   "Design": {
     "backgroundColor": "bg-gray-100",
-    "textColor": "text-gray-400"
+    "textColor": "text-white"
   },
   "Vray": {
     "backgroundColor": "bg-teal-100",
-    "textColor": "text-teal-300"
+    "textColor": "text-white"
   },
   "Rhino": {
     "backgroundColor": "bg-cyan-100",
-    "textColor": "text-cyan-300"
+    "textColor": "text-white"
   },
   "default": {
     "backgroundColor": "bg-slate-100",
-    "textColor": "text-slate-300"
+    "textColor": "text-white"
   }
 }
