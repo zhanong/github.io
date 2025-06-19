@@ -98,7 +98,7 @@
 
                     const { attributes, body } = parseFrontMatter(markdownContent);
                     displayTitle = attributes.title;
-                    displayDate = attributes.Date;
+                    displayDate = attributes.date; // Note: 'date' in your .md files is lowercase
                     contentBody = body;
                 } else {
                     throw new Error("No post path or URL specified.");
@@ -109,28 +109,40 @@
                     document.title = `${displayTitle} | Flying Island`;
                 }
 
+                // START OF NEW/IMPROVED RENDERER
                 const renderer = new marked.Renderer();
+                // Construct the base URL for your deployed GitHub Pages site.
+                const siteBaseUrl = `https://zhanong.github.io/`;
+
                 renderer.image = (href, title, text) => {
-                    // If the image has alt text (text), create a figure and figcaption
+                    let finalHref = href;
+                    // If the href is a relative path (doesn't start with http),
+                    // convert it to an absolute URL.
+                    if (!href.startsWith('http')) {
+                        finalHref = new URL(href, siteBaseUrl).href;
+                    }
+
+                    // If there is alt text, create a captioned image card.
                     if (text) {
                         return `
                     <figure class="image-card">
-                        <img src="${href}" alt="${text}" />
+                        <img src="${finalHref}" alt="${text}" />
                         <figcaption class="image-caption">${text}</figcaption>
                     </figure>
                     `;
                     }
-                    // Otherwise, return a standard image tag
-                    return `<img src="${href}" alt="" />`;
+                    // Otherwise, return a standard image.
+                    return `<img src="${finalHref}" alt="" />`;
                 };
+                // END OF NEW/IMPROVED RENDERER
 
                 const postHTML = marked.parse(contentBody, { renderer });
 
                 container.innerHTML = `
-                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
-                    <p class="text-slate-500 mb-8">${displayDate || ''}</p>
-                    <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
-                `;
+                <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
+                <p class="text-slate-500 mb-8">${displayDate || ''}</p>
+                <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
+            `;
 
                 document.querySelectorAll('pre code').forEach((block) => {
                     hljs.highlightElement(block);
