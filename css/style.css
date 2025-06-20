@@ -244,14 +244,12 @@ body {
     border: 0;
 }
 
-/* --- START: IMAGE AND CAPTION STYLES --- 
-*/
-
 /* * Styles for regular (un-captioned) images. 
  * This ensures they still look like cards, just as they did before.
  */
 .post-content > img, .post-content p > img {
     max-width: 100%;
+    max-height: 56rem;
     height: auto;
     display: block;
     margin: 2em auto;
@@ -274,9 +272,10 @@ body {
 /* * Removes default styling from the image when it's inside our card. 
  */
 .post-content .image-card img {
-    width: 100%; /* <-- ADDED THIS LINE */
+    width: 100%;
     max-width: 100%;
-    height: auto;
+    max-height: 56rem;
+    object-fit: contain;
     display: block; /* Removes bottom space */
     margin: 0;
     border-radius: 0;
@@ -292,5 +291,3 @@ body {
     color: #475569;
     font-style: italic;
 }
-/* --- END: IMAGE AND CAPTION STYLES --- 
-*/
