@@ -129,20 +129,20 @@ body {
 }
 
 .post-content h1 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .post-content h2 {
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .post-content h3 {
-    font-size: 1.25rem;
+    font-size: 0.8rem;
 }
 
 .post-content p {
     margin-bottom: 1.5rem;
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
 .post-content a {
