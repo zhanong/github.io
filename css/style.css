@@ -28,9 +28,11 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -98,7 +100,8 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%;
+    /* 16:9 Aspect Ratio */
     margin-bottom: 1.25rem;
 }
 
@@ -117,7 +120,7 @@ body {
 /* 4.1. Typography */
 .post-content {
     /* Set a smaller base font for mobile (13px) to scale all rem units down */
-    font-size: 0.7rem; 
+    font-size: 0.7rem;
 }
 
 .post-content h1,
@@ -186,8 +189,8 @@ body {
 }
 
 /* 4.2. Images */
-.post-content > img,
-.post-content p > img,
+.post-content>img,
+.post-content p>img,
 .post-content .image-card img {
     max-width: 100%;
     display: block;
@@ -197,8 +200,8 @@ body {
     max-height: 50rem;
 }
 
-.post-content > img,
-.post-content p > img {
+.post-content>img,
+.post-content p>img {
     margin-top: 2em;
     margin-bottom: 2em;
     border-radius: 8px;
@@ -223,11 +226,10 @@ body {
 }
 
 .post-content .image-card .image-caption {
-    padding: 0.75em 1em;
+    padding: 0.5em 1em;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: #475569;
-    font-style: italic;
 }
 
 
@@ -235,8 +237,9 @@ body {
 
 /* 5.1. Small Screens ('sm' breakpoint, 640px) and up */
 @media (min-width: 640px) {
-    .post-content > img,
-    .post-content p > img,
+
+    .post-content>img,
+    .post-content p>img,
     .post-content .image-card img {
         /* Calculation: 56rem container - 3rem outer padding - 6rem inner padding */
         max-height: 47rem;
@@ -245,9 +248,10 @@ body {
 
 /* 5.2. Large Screens ('lg' breakpoint, 1024px) and up */
 @media (min-width: 1024px) {
+
     /* Adjust image max-height */
-    .post-content > img,
-    .post-content p > img,
+    .post-content>img,
+    .post-content p>img,
     .post-content .image-card img {
         /* Calculation: 56rem container - 4rem outer padding - 8rem inner padding */
         max-height: 44rem;
@@ -274,5 +278,10 @@ body {
     .post-content p {
         margin-bottom: 1.6rem;
         line-height: 2.2;
+    }
+
+    .post-content .image-card .image-caption {
+        padding: 0.75em 1em;
+        font-size: 0.9rem;
     }
 }
