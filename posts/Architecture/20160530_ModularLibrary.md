@@ -25,7 +25,7 @@ The main body of the building is composed of 12 prefabricated modules. These mod
 
 To simplify the assembly process, the joints between the modules received special design consideration. Furthermore, integrated installation bays allow workers to access and complete the module connections safely from inside the building.
 
-![Modular Construction](img/20160530/construction.png)
+![Modular Construction](img/20160530/detail.png)
 
 ## Equipment
 To simplify assembly and minimize construction errors, the building is divided into four service groups with minimal cross-module connections. Each group has its own HVAC and electrical systems, with one group also managing the water supply. This equipment is consolidated in unusable spaces at the building's base to maximize usable area.

@@ -244,25 +244,28 @@ body {
     border: 0;
 }
 
-/* --- START: IMAGE AND CAPTION STYLES --- 
-*/
+/* --- START: IMAGE AND CAPTION STYLES --- */
 
-/* * Styles for regular (un-captioned) images. 
- * This ensures they still look like cards, just as they did before.
- */
-.post-content > img, .post-content p > img {
+/* Base styles for all post images */
+.post-content > img,
+.post-content p > img,
+.post-content .image-card img {
     max-width: 100%;
-    max-height: 56rem;
-    height: auto;
     display: block;
-    margin: 2em auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Specific styles for un-captioned images (card look) */
+.post-content > img,
+.post-content p > img {
+    margin-top: 2em;
+    margin-bottom: 2em;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* * Styles for the captioned image card container (<figure>).
- * This is now the element that has the shadow and border, wrapping everything.
- */
+/* Styles for the captioned image card container (<figure>) */
 .post-content .image-card {
     width: -moz-fit-content;
     width: fit-content;
@@ -274,24 +277,47 @@ body {
     background-color: #f8fafc;
 }
 
-/* * Removes default styling from the image when it's inside our card. 
- */
+/* Styles for the image inside the card */
 .post-content .image-card img {
-    max-width: 100%;
-    max-height: 56rem;
-    display: block;
     margin: 0;
     border-radius: 0;
     box-shadow: none;
 }
 
-/* * Styles the caption text inside the card.
- */
+/* Styles for the caption text inside the card */
 .post-content .image-card .image-caption {
     padding: 0.75em 1em;
     text-align: center;
-    font-size: 0.8rem;
-    color: #556172;
+    font-size: 0.9rem;
+    color: #475569;
+    font-style: italic;
 }
-/* --- END: IMAGE AND CAPTION STYLES --- 
-*/
+
+/* --- Responsive Max Height for all post images --- */
+
+/* Default (Smallest screens): 56rem - 2rem (outer p) - 4rem (inner p) = 50rem */
+.post-content > img,
+.post-content p > img,
+.post-content .image-card img {
+    max-height: 50rem;
+}
+
+/* 'sm' breakpoint (640px) and up: 56rem - 3rem (outer p) - 6rem (inner p) = 47rem */
+@media (min-width: 640px) {
+    .post-content > img,
+    .post-content p > img,
+    .post-content .image-card img {
+        max-height: 47rem;
+    }
+}
+
+/* 'lg' breakpoint (1024px) and up: 56rem - 4rem (outer p) - 8rem (inner p) = 44rem */
+@media (min-width: 1024px) {
+    .post-content > img,
+    .post-content p > img,
+    .post-content .image-card img {
+        max-height: 44rem;
+    }
+}
+
+/* --- END: IMAGE AND CAPTION STYLES --- */
