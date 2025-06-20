@@ -2,27 +2,27 @@
   {
     "name": "All",
     "folder": null,
-    "colorClass": "bg-white",
+    "colorClass": "bg-[#faf9fa]",
     "textColor": "text-slate-800"
   },
   {
     "name": "Game",
     "folder": "Game",
-    "colorClass": "bg-[#ecd9f2]",
-    "textColor": "text-black"
+    "colorClass": "bg-[#faf9fa]",
+    "textColor": "text-[#723fc8]"
   },
 
   {
     "name": "Tech",
     "folder": "Tech",
-    "colorClass": "bg-[#d2dff2]",
-    "textColor": "text-black"
+    "colorClass": "bg-[#faf9fa]",
+    "textColor": "text-[#2474d9]"
   },
 
   {
     "name": "Architecture",
     "folder": "Architecture",
-    "colorClass": "bg-[#dfefd3]",
-    "textColor": "text-black"
+    "colorClass": "bg-[#faf9fa]",
+    "textColor": "text-[#33a166]"
   }
 ]
