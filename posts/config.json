@@ -8,21 +8,21 @@
   {
     "name": "Game",
     "folder": "Game",
-    "colorClass": "bg-white",
+    "colorClass": "e1c2eb",
     "textColor": "text-[#723fc8]"
   },
 
   {
     "name": "Tech",
     "folder": "Tech",
-    "colorClass": "bg-white",
+    "colorClass": "c1d6f2",
     "textColor": "text-[#2474d9]"
   },
 
   {
     "name": "Architecture",
     "folder": "Architecture",
-    "colorClass": "bg-white",
+    "colorClass": "d1e6c0",
     "textColor": "text-[#33a166]"
   }
 ]
