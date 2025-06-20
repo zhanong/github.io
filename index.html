@@ -1,227 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flying Island</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-
-        <div id="header-placeholder"></div>
-
-        <div class="content-gradient p-6 sm:p-12 rounded-2xl shadow-2xl">
-            <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div id="loading-indicator" class="col-span-full text-center">
-                    <div class="loader"></div>
-                    <p class="text-slate-600">Loading posts...</p>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <script src="js/shared.js"></script>
-
-    <script>
-        let allPosts = [];
-        let categoriesConfig = [];
-        let tagsConfig = {}; // <-- Add this line
-
-        async function loadHeader() {
-            try {
-                const response = await fetch('includes/header.html');
-                const headerHTML = await response.text();
-                document.getElementById('header-placeholder').innerHTML = headerHTML;
-
-            } catch (error) {
-                console.error('Error loading header:', error);
-            }
-        }
-
-        async function loadConfig() {
-            try {
-                const response = await fetch('posts/config.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                categoriesConfig = await response.json();
-            } catch (error) {
-                console.error("Could not load or parse 'posts/config.json':", error);
-                const container = document.getElementById('posts-container');
-                container.innerHTML = `<p class="col-span-full text-center text-red-500">Error: Could not load site configuration.</p>`;
-            }
-        }
-
-        async function loadTagsConfig() {
-            try {
-                const response = await fetch('posts/tag.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                tagsConfig = await response.json();
-            } catch (error) {
-                console.warn("Could not load 'posts/tag.json'. Tags will use default styles.", error);
-            }
-        }
-
-        function generateAboutButton() {
-            const navPlaceholder = document.getElementById('nav-placeholder');
-            if (!navPlaceholder) return; // Guard against missing element
-
-            navPlaceholder.innerHTML = `
-            <nav>
-                <ul id="category-buttons" class="flex flex-wrap items-baseline">
-                    <li class="sm:mr-4 mr-2 mb-2">
-                        <a href="post.html?path=About.md" class="nav-link text-base sm:text-lg text-slate-600 hover:text-slate-900 transition-colors">About</a>
-                    </li>
-                    <li class="sm:mr-4 mr-2 mb-2">
-                        <span class="text-slate-300">|</span>
-                    </li>
-                </ul>
-            </nav>
-            `;
-        }
-
-        function generateCategoryButtons() {
-            const navLinksContainer = document.getElementById('category-buttons');
-            if (!navLinksContainer) return; // Guard against missing element
-
-            // Use += to append the category links to the list that already contains "About"
-            navLinksContainer.innerHTML += categoriesConfig.map(category => `
-                <li class="sm:mr-4 mr-2 mb-2">
-                    <a href="#" class="nav-link category-filter text-base sm:text-lg text-slate-600 hover:text-slate-900 transition-colors" data-category="${category.name}">
-                        ${category.name}
-                    </a>
-                </li>
-            `).join('');
-        }
-
-        function createPostCard(post) {
-            const { title, summary, featureImage, date, link, tags } = post.attributes;
-            const categoryStyle = post.categoryConfig || { colorClass: 'bg-white', textColor: 'text-slate-800' };
-
-            let postUrl;
-            if (link) {
-                postUrl = `post.html?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}&date=${encodeURIComponent(date)}`;
-            } else {
-                postUrl = `post.html?path=${post.path}`;
-            }
-
-            let tagsHTML = '';
-            if (tags && typeof tags === 'string') {
-                const tagList = tags.split(',').map(tag => tag.trim());
-                tagsHTML = tagList.map(tagName => {
-                    const style = tagsConfig[tagName] || tagsConfig['default'];
-                    return `<span class="inline-block ${style.backgroundColor} ${style.textColor} text-xs mr-1 mb-1 px-2 py-0.5 rounded-full">${tagName}</span>`;
-                }).join('');
-            }
-
-            const postContent = `
-                <div class="relative h-48 flex-grow image-top-shadow">
-                    <img src="${featureImage}" alt="${title || ''}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0" onerror="this.style.display='none';">
-                    <div class="absolute inset-0 p-8 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 bg-white bg-opacity-95 overflow-y-auto">
-                        <p class="text-sm font-light text-slate-700">${summary || ''}</p>
-                    </div>
-                </div>
-            `;
-
-
-            return `
-                <a href="${postUrl}" class="group block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col h-full">
-                    <div class="p-4">
-                        <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
-                        <div class="flex items-baseline flex-wrap mt-2">
-                            <p class="text-xs ${categoryStyle.textColor} opacity-75 mr-3 whitespace-nowrap">${date || ''}</p>
-                            ${tagsHTML}
-                        </div>
-                    </div>
-                    ${postContent}
-                </a>
-            `;
-        }
-
-        function renderPosts(categoryFilter = 'All') {
-            const container = document.getElementById('posts-container');
-            const postsToRender = categoryFilter === 'All' ? allPosts : allPosts.filter(post => post.category === categoryFilter);
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.toggle('active', link.dataset.category === categoryFilter);
-            });
-
-            if (postsToRender.length > 0) {
-                container.innerHTML = postsToRender.map(createPostCard).join('');
-            } else {
-                container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found in this category.</p>';
-            }
-        }
-
-        async function loadPosts() {
-            const container = document.getElementById('posts-container');
-            const loadingIndicator = document.getElementById('loading-indicator');
-
-            try {
-                const fetchableCategories = categoriesConfig.filter(cat => cat.folder); // Don't try to fetch for "All"
-
-                const categoryPromises = fetchableCategories.map(async (category) => {
-                    const path = `posts/${encodeURIComponent(category.folder)}`;
-                    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`;
-                    const response = await fetch(apiUrl);
-                    if (!response.ok) return [];
-                    const files = await response.json();
-                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
-
-                    const filePromises = mdFiles.map(async (file) => {
-                        const fileResponse = await fetch(file.download_url);
-                        if (!fileResponse.ok) return null;
-                        const content = await fileResponse.text();
-                        const { attributes } = parseFrontMatter(content);
-                        // Attach category and its config to the post object
-                        return { attributes, path: file.path, category: category.name, categoryConfig: category };
-                    });
-                    return Promise.all(filePromises);
-                });
-
-                const results = await Promise.all(categoryPromises);
-                allPosts = results.flat().filter(Boolean).sort((a, b) => new Date(b.attributes.date) - new Date(a.attributes.date));
-
-                loadingIndicator.style.display = 'none';
-                renderPosts(new URLSearchParams(window.location.hash.substring(1)).get('category') || 'All');
-            } catch (error) {
-                console.error('Error loading posts:', error);
-                loadingIndicator.style.display = 'none';
-                container.innerHTML = `<p class="col-span-full text-center text-red-500">Error loading posts.</p>`;
-            }
-        }
-
-        function setupEventListeners() {
-            // Use event delegation on the header placeholder for robustness
-            document.getElementById('header-placeholder').addEventListener('click', (e) => {
-                if (e.target.matches('.category-filter')) {
-                    e.preventDefault();
-                    const category = e.target.dataset.category;
-                    window.history.pushState(null, '', `#category=${category}`);
-                    renderPosts(category);
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            await loadHeader();
-            await loadConfig();
-            await loadTagsConfig(); // <-- Add this line
-            generateAboutButton();
-            generateCategoryButtons();
-            setupEventListeners();
-            loadPosts();
-        });
-    </script>
-</body>
-
-</html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Flying Island</title>
+ 
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+ 
+     <link rel="stylesheet" href="css/style.css">
+     <style>
+         .dark-overlay::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+             z-index: 1; /* Ensure it's above the image */
+         }
+     </style>
+ </head>
+ 
+ <body>
+     <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+ 
+         <div id="header-placeholder"></div>
+ 
+         <div class="content-gradient p-6 sm:p-12 rounded-2xl shadow-2xl">
+             <main id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                 <div id="loading-indicator" class="col-span-full text-center">
+                     <div class="loader"></div>
+                     <p class="text-slate-600">Loading posts...</p>
+                 </div>
+             </main>
+         </div>
+     </div>
+ 
+     <script src="js/shared.js"></script>
+ 
+     <script>
+         let allPosts = [];
+         let categoriesConfig = [];
+         let tagsConfig = {}; // <-- Add this line
+ 
+         async function loadHeader() {
+             try {
+                 const response = await fetch('includes/header.html');
+                 const headerHTML = await response.text();
+                 document.getElementById('header-placeholder').innerHTML = headerHTML;
+ 
+             } catch (error) {
+                 console.error('Error loading header:', error);
+             }
+         }
+ 
+         async function loadConfig() {
+             try {
+                 const response = await fetch('posts/config.json');
+                 if (!response.ok) {
+                     throw new Error(`HTTP error! status: ${response.status}`);
+                 }
+                 categoriesConfig = await response.json();
+             } catch (error) {
+                 console.error("Could not load or parse 'posts/config.json':", error);
+                 const container = document.getElementById('posts-container');
+                 container.innerHTML = `<p class="col-span-full text-center text-red-500">Error: Could not load site configuration.</p>`;
+             }
+         }
+ 
+         async function loadTagsConfig() {
+             try {
+                 const response = await fetch('posts/tag.json');
+                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                 tagsConfig = await response.json();
+             } catch (error) {
+                 console.warn("Could not load 'posts/tag.json'. Tags will use default styles.", error);
+             }
+         }
+ 
+         function generateAboutButton() {
+             const navPlaceholder = document.getElementById('nav-placeholder');
+             if (!navPlaceholder) return; // Guard against missing element
+ 
+             navPlaceholder.innerHTML = `
+             <nav>
+                 <ul id="category-buttons" class="flex flex-wrap items-baseline">
+                     <li class="sm:mr-4 mr-2 mb-2">
+                         <a href="post.html?path=About.md" class="nav-link text-base sm:text-lg text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                     </li>
+                     <li class="sm:mr-4 mr-2 mb-2">
+                         <span class="text-slate-300">|</span>
+                     </li>
+                 </ul>
+             </nav>
+             `;
+         }
+ 
+         function generateCategoryButtons() {
+             const navLinksContainer = document.getElementById('category-buttons');
+             if (!navLinksContainer) return; // Guard against missing element
+ 
+             // Use += to append the category links to the list that already contains "About"
+             navLinksContainer.innerHTML += categoriesConfig.map(category => `
+                 <li class="sm:mr-4 mr-2 mb-2">
+                     <a href="#" class="nav-link category-filter text-base sm:text-lg text-slate-600 hover:text-slate-900 transition-colors" data-category="${category.name}">
+                         ${category.name}
+                     </a>
+                 </li>
+             `).join('');
+         }
+ 
+         function createPostCard(post) {
+             const { title, summary, featureImage, date, link, tags } = post.attributes;
+             const categoryStyle = post.categoryConfig || { colorClass: 'bg-white', textColor: 'text-slate-800' };
+ 
+             let postUrl;
+             if (link) {
+                 postUrl = `post.html?url=<span class="math-inline">\{encodeURIComponent\(link\)\}&title\=</span>{encodeURIComponent(title)}&date=${encodeURIComponent(date)}`;
+             } else {
+                 postUrl = `post.html?path=${post.path}`;
+             }
+ 
+             let tagsHTML = '';
+             if (tags && typeof tags === 'string') {
+                 const tagList = tags.split(',').map(tag => tag.trim());
+                 tagsHTML = tagList.map(tagName => {
+                     const style = tagsConfig && tagsConfig['default'] ? tagsConfig['default'] : {};
+                     const tagStyle = tagsConfig && tagsConfig.hasOwnProperty(tagName) ? tagsConfig : style;
+                     return `<span class="inline-block ${tagStyle.backgroundColor || 'bg-slate-200'} <span class="math-inline">\{tagStyle\.textColor \|\| 'text\-slate\-700'\} text\-xs mr\-1 mb\-1 px\-2 py\-0\.5 rounded\-full"\></span>{tagName}</span>`;
+                 }).join('');
+             }
+ 
+             const postContent = `
+                 <div class="relative h-48 flex-grow dark-overlay">
+                     <img src="<span class="math-inline">\{featureImage\}" alt\="</span>{title || ''}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0" onerror="this.style.display='none';">
+                     <div class="absolute inset-0 p-8 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 bg-white bg-opacity-95 overflow-y-auto">
+                         <p class="text-sm font-light text-slate-700">${summary || ''}</p>
+                     </div>
+                 </div>
+             `;
+ 
+ 
+             return `
+                 <a href="${postUrl}" class="group block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col h-full">
+                     <div class="p-4">
+                         <h3 class="font-bold truncate <span class="math-inline">\{categoryStyle\.textColor\}"\></span>{title || 'Untitled Post'}</h3>
+                         <div class="flex items-baseline flex-wrap mt-2">
+                             <p class="text-xs <span class="math-inline">\{categoryStyle\.textColor\} opacity\-75 mr\-3 whitespace\-nowrap"\></span>{date || ''}</p>
+                             ${tagsHTML}
+                         </div>
+                     </div>
+                     ${postContent}
+                 </a>
+             `;
+         }
+ 
+         function renderPosts(categoryFilter = 'All') {
+             const container = document.getElementById('posts-container');
+             const postsToRender = categoryFilter === 'All' ? allPosts : allPosts.filter(post => post.category === categoryFilter);
+ 
+             document.querySelectorAll('.nav-link').forEach(link => {
+                 link.classList.toggle('active', link.dataset.category === categoryFilter);
+             });
+ 
+             if (postsToRender.length > 0) {
+                 container.innerHTML = postsToRender.map(createPostCard).join('');
+             } else {
+                 container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found in this category.</p>';
+             }
+         }
+ 
+         async function loadPosts() {
+             const container = document.getElementById('posts-container');
+             const loadingIndicator = document.getElementById('loading-indicator');
+ 
+             try {
+                 const fetchableCategories = categoriesConfig.filter(cat => cat.folder); // Don't try to fetch for "All"
+ 
+                 const categoryPromises = fetchableCategories.map(async (category) => {
+                     const path = `posts/${encodeURIComponent(category.folder)}`;
+                     const apiUrl = `https://api.github.com/repos/<span class="math-inline">\{GITHUB\_USER\}/</span>{GITHUB_REPO}/contents/${path}`;
+                     const response = await fetch(apiUrl);
+                     if (!response.ok) return [];
+                     const files = await response.json();
+                     const mdFiles = files.filter(file => file.name.endsWith('.md'));
+ 
+                     const filePromises = mdFiles.map(async (file) => {
+                         const fileResponse = await fetch(file.download_url);
+                         if (!fileResponse.ok) return null;
+                         const content = await fileResponse.text();
+                         const { attributes } = parseFrontMatter(content);
+                         // Attach category and its config to the post object
+                         return { attributes, path: file.path, category: category.name, categoryConfig: category };
+                     });
+                     return Promise.all(filePromises);
+                 });
+ 
+                 const results = await Promise.all(categoryPromises);
+                 allPosts = results.flat().filter(Boolean).sort((a, b) => new Date(b.attributes.date) - new Date(a.attributes.date));
+ 
+                 loadingIndicator.style.display = 'none';
+                 renderPosts(new URLSearchParams(window.location.hash.substring(1)).get('category') || 'All');
+             } catch (error) {
+                 console.error('Error loading posts:', error);
+                 loadingIndicator.style.display = 'none';
+                 container.innerHTML = `<p class="col-span-full text-center text-red-500">Error loading posts.</p>`;
+             }
+         }
+ 
+         function setupEventListeners() {
+             // Use event delegation on the header placeholder for robustness
+             document.getElementById('header-placeholder').addEventListener('click', (e) => {
+                 if (e.target.matches('.category-filter')) {
+                     e.preventDefault();
+                     const category = e.target.dataset.category;
+                     window.history.pushState(null, '', `#category=${category}`);
+                     renderPosts(category);
+                 }
+             });
+         }
+ 
+         document.addEventListener('DOMContentLoaded', async () => {
+             await loadHeader();
+             await loadConfig();
+             await loadTagsConfig(); // <-- Add this line
+             generateAboutButton();
+             generateCategoryButtons();
+             setupEventListeners();
+             loadPosts();
+         });
+     </script>
+ </body>
+ 
+ </html>
