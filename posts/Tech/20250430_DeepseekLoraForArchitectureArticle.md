@@ -1,8 +1,9 @@
 ---
-title: Tuning Deepseek LoRa for Stylized Article
+title: Article Style LoRa Tuning
 date: 2025-04-30
 featureImage: img/20250430_cover.png
-tags: Python, LlamaFactory, AI
+summary: My try of tuning a Deepseek LoRa.
+tags: Python, LlamaFactory, LLM
 ---
 
 <div class="video-container">

@@ -2,7 +2,8 @@
 title: House with a Bath
 date: 2017-03-15
 featureImage: img/20170315/cover.png
-tags: Design, Vray, Rhino
+summary: A renovation of a barn house. Turn it into a cozy house featuring a bath.
+tags: Vray, Rhino
 ---
 ![](img/20170315/cover.png)
 
