@@ -15,6 +15,8 @@ Our solution is a versatile corridor built with salvaged materials. Using adjust
 
 ![Restoration Layout](img/20170315/plan.png)
 
-![](img/20170315/scenario.png)
+![Construction Without Heavy Equipment](img/20170315/construction.png)
+
+![Community Sunset Party](img/20170315/scenario.png)
 
 
