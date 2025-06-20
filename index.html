@@ -117,17 +117,16 @@
             let tagsHTML = '';
             if (tags && typeof tags === 'string') {
                 const tagList = tags.split(',').map(tag => tag.trim());
-                const tagSpans = tagList.map(tagName => {
+                tagsHTML = tagList.map(tagName => {
                     const style = tagsConfig[tagName] || tagsConfig['default'];
                     return `<span class="inline-block ${style.backgroundColor} ${style.textColor} text-xs mr-1 mb-1 px-2 py-0.5 rounded-full">${tagName}</span>`;
                 }).join('');
-                tagsHTML = `<div class="mt-2">${tagSpans}</div>`;
             }
 
             const postContent = `
                 <div class="relative h-48 flex-grow">
                     <img src="${featureImage}" alt="${title || ''}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0" onerror="this.style.display='none';">
-                    <div class="absolute inset-0 p-4 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 bg-white bg-opacity-95 overflow-y-auto">
+                    <div class="absolute inset-0 p-8 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 bg-white bg-opacity-95 overflow-y-auto">
                         <p class="text-sm font-light text-slate-700">${summary || ''}</p>
                     </div>
                 </div>
@@ -138,8 +137,10 @@
                 <a href="${postUrl}" class="group block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col h-full">
                     <div class="p-4">
                         <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
-                        <p class="text-xs ${categoryStyle.textColor} opacity-75">${date || ''}</p>
-                        ${tagsHTML}
+                        <div class="flex items-baseline flex-wrap mt-2">
+                            <p class="text-xs ${categoryStyle.textColor} opacity-75 mr-3 whitespace-nowrap">${date || ''}</p>
+                            ${tagsHTML}
+                        </div>
                     </div>
                     ${postContent}
                 </a>
