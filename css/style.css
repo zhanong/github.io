@@ -1,17 +1,21 @@
 /*
- * This class is applied to a grid container.
- * It ensures that all rows in the grid will have the same height,
- * distributing the available space equally.
- */
-.equal-height-grid {
-    grid-auto-rows: 1fr;
-}
+================================================
+TABLE OF CONTENTS
+================================================
+1. GLOBAL STYLES & ANIMATIONS
+2. LAYOUT & HELPERS
+3. COMPONENT STYLES
+4. POST CONTENT (Mobile-First)
+    4.1. Typography
+    4.2. Images
+5. RESPONSIVE STYLES
+    5.1. Small Screens (sm)
+    5.2. Large Screens (lg)
+================================================
+*/
 
-/*
- * This sets the base styles for the entire page.
- * It defines the default font as 'Inter' and sets a light gray
- * background color for the body of the website.
- */
+
+/* --- 1. GLOBAL STYLES & ANIMATIONS --- */
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(to bottom right, #bad9f1, #ebf2f7, #bad9f1);
@@ -32,50 +36,6 @@ body {
     }
 }
 
-.content-gradient {
-    background: linear-gradient(to bottom right, rgb(243 232 255 / 0.8), rgb(231 223 252 / 0.9));
-}
-
-/*
- * This class is applied to elements, like cards, that should have a hover effect.
- * It sets up a smooth transition for changes to the 'transform' and 'box-shadow'
- * properties, making the hover effect animate cleanly over 0.2 seconds.
- */
-.card-hover {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-/*
- * This rule defines the styles for the .card-hover element when a user
- * hovers their mouse over it.
- * 'transform: translateY(-5px);' moves the card up by 5 pixels.
- * 'box-shadow: ...' adds a subtle shadow to give the card a "lifted" appearance.
- */
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-
-/*
- * This class styles the loading indicator, which is a spinning circle.
- * It creates a circular shape with a light gray border and a blue top border.
- * The 'animation' property applies the 'spin' animation to make it rotate.
- */
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-
-/*
- * This is the keyframe animation for the loader.
- * It defines a 'spin' animation that rotates the element from 0 degrees
- * to 360 degrees, creating a continuous spinning effect.
- */
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -86,155 +46,62 @@ body {
     }
 }
 
-/*
- * This class styles the navigation links in the header.
- * It adds some padding, gives them rounded corners, and sets up a
- * transition for smooth changes to its properties.
- */
+
+/* --- 2. LAYOUT & HELPERS --- */
+.equal-height-grid {
+    grid-auto-rows: 1fr;
+}
+
+.content-gradient {
+    background: linear-gradient(to bottom right, rgb(243 232 255 / 0.8), rgb(231 223 252 / 0.9));
+}
+
+
+/* --- 3. COMPONENT STYLES --- */
+.card-hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
 .nav-link {
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
-    /* rounded-md */
     transition: all 0.5s ease-in-out;
 }
 
-/*
- * This rule styles the currently active navigation link.
- * It gives it a white text color, a fuchsia background color, makes the
- * font bold, and removes the bottom border to make it stand out.
- */
 .nav-link.active {
     color: #0f172a;
     background-color: #dec5f7;
-    /* A nice Fuchsia color from Tailwind */
     font-weight: 500;
     border-bottom-color: transparent;
 }
 
-/*
- * This styles the navigation links when they are hovered over, but only if
- * they are not the currently active link. It changes the text color to a
- * darker slate color.
- */
 .nav-link:not(.active):hover {
     background-color: #e9e1fc;
 }
 
-/*
- * These rules style the headings (h1, h2, h3) inside the blog post content.
- * They make the headings bold and add some space above and below them
- * to separate them from other content.
- */
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-    font-weight: bold;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-}
-
-/* Defines the font size for the main heading (h1). */
-.post-content h1 {
-    font-size: 2.25rem;
-}
-
-/* Defines the font size for a sub-heading (h2). */
-.post-content h2 {
-    font-size: 1.875rem;
-}
-
-/* Defines the font size for a smaller sub-heading (h3). */
-.post-content h3 {
-    font-size: 1.5rem;
-}
-
-/*
- * This styles the paragraphs within the blog post content.
- * It adds some space at the bottom of each paragraph and increases the
- * line height to make the text easier to read.
- */
-.post-content p {
-    margin-bottom: 3rem;
-    line-height: 2.5;
-}
-
-/* Styles links within the post content, making them blue and underlined. */
-.post-content a {
-    color: #3b82f6;
-    text-decoration: underline;
-}
-
-/*
- * This styles inline code snippets (e.g., `code` tags not inside a `<pre>` tag).
- * It gives them a light gray background, a different text color, and
- * rounded corners to make them look like code.
- */
-.post-content :not(pre)>code {
-    background-color: #f1f5f9;
-    color: #475569;
-    padding: 0.2em 0.4em;
-    margin: 0;
-    font-size: 85%;
-    border-radius: 6px;
-}
-
-/*
- * This styles blocks of code (i.e., a `code` tag inside a `<pre>` tag).
- * It adds padding, makes it a block-level element, and allows for
- * horizontal scrolling if the code is too wide.
- */
-.post-content pre code {
-    padding: 1em;
-    display: block;
-    overflow-x: auto;
-}
-
-/* Styles unordered (bulleted) lists with standard disc bullets and padding. */
-.post-content ul {
-    list-style-type: disc;
-    padding-left: 2em;
-    margin-bottom: 1em;
-}
-
-/* Styles ordered (numbered) lists with decimal numbers and padding. */
-.post-content ol {
-    list-style-type: decimal;
-    padding-left: 2em;
-    margin-bottom: 1em;
-}
-
-/*
- * This styles blockquotes.
- * It adds a gray border on the left, padding, italicizes the text, and
- * changes the text color to visually distinguish it as a quote.
- */
-.post-content blockquote {
-    border-left: 4px solid #cbd5e1;
-    padding-left: 1em;
-    margin-left: 0;
-    font-style: italic;
-    color: #475569;
-}
-
-/*
- * This class is used as a container for embedded videos to make them responsive.
- * It maintains a 16:9 aspect ratio, which is common for videos.
- * The 'padding-top: 56.25%' is a trick to achieve this (9 / 16 = 0.5625).
- */
 .video-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 56.25%;
-    /* 16:9 Aspect Ratio */
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
     margin-bottom: 1.25rem;
 }
 
-/*
- * This styles the iframe element (commonly used for embedding videos)
- * inside the .video-container. It makes the iframe fill the entire
- * container, ensuring the video is responsive.
- */
 .video-container iframe {
     position: absolute;
     top: 0;
@@ -244,9 +111,76 @@ body {
     border: 0;
 }
 
-/* --- START: IMAGE AND CAPTION STYLES --- */
 
-/* Base styles for all post images */
+/* --- 4. POST CONTENT (Mobile-First) --- */
+
+/* 4.1. Typography */
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+    font-weight: bold;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.post-content h1 {
+    font-size: 1.75rem;
+}
+
+.post-content h2 {
+    font-size: 1.5rem;
+}
+
+.post-content h3 {
+    font-size: 1.25rem;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.post-content a {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+
+.post-content :not(pre)>code {
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 6px;
+}
+
+.post-content pre code {
+    padding: 1em;
+    display: block;
+    overflow-x: auto;
+}
+
+.post-content ul {
+    list-style-type: disc;
+    padding-left: 2em;
+    margin-bottom: 1em;
+}
+
+.post-content ol {
+    list-style-type: decimal;
+    padding-left: 2em;
+    margin-bottom: 1em;
+}
+
+.post-content blockquote {
+    border-left: 4px solid #cbd5e1;
+    padding-left: 1em;
+    margin-left: 0;
+    font-style: italic;
+    color: #475569;
+}
+
+/* 4.2. Images */
 .post-content > img,
 .post-content p > img,
 .post-content .image-card img {
@@ -254,9 +188,10 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    /* Default max-height for smallest screens */
+    max-height: 50rem; /* 56rem container - 2rem outer padding - 4rem inner padding */
 }
 
-/* Specific styles for un-captioned images (card look) */
 .post-content > img,
 .post-content p > img {
     margin-top: 2em;
@@ -265,7 +200,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Styles for the captioned image card container (<figure>) */
 .post-content .image-card {
     width: -moz-fit-content;
     width: fit-content;
@@ -277,14 +211,12 @@ body {
     background-color: #f8fafc;
 }
 
-/* Styles for the image inside the card */
 .post-content .image-card img {
     margin: 0;
     border-radius: 0;
     box-shadow: none;
 }
 
-/* Styles for the caption text inside the card */
 .post-content .image-card .image-caption {
     padding: 0.75em 1em;
     text-align: center;
@@ -293,31 +225,42 @@ body {
     font-style: italic;
 }
 
-/* --- Responsive Max Height for all post images --- */
 
-/* Default (Smallest screens): 56rem - 2rem (outer p) - 4rem (inner p) = 50rem */
-.post-content > img,
-.post-content p > img,
-.post-content .image-card img {
-    max-height: 50rem;
-}
+/* --- 5. RESPONSIVE STYLES --- */
 
-/* 'sm' breakpoint (640px) and up: 56rem - 3rem (outer p) - 6rem (inner p) = 47rem */
+/* 5.1. Small Screens ('sm' breakpoint, 640px) and up */
 @media (min-width: 640px) {
     .post-content > img,
     .post-content p > img,
     .post-content .image-card img {
-        max-height: 47rem;
+        max-height: 47rem; /* 56rem container - 3rem outer padding - 6rem inner padding */
     }
 }
 
-/* 'lg' breakpoint (1024px) and up: 56rem - 4rem (outer p) - 8rem (inner p) = 44rem */
+/* 5.2. Large Screens ('lg' breakpoint, 1024px) and up */
 @media (min-width: 1024px) {
+    /* Adjust image max-height */
     .post-content > img,
     .post-content p > img,
     .post-content .image-card img {
-        max-height: 44rem;
+        max-height: 44rem; /* 56rem container - 4rem outer padding - 8rem inner padding */
+    }
+
+    /* Adjust typography for desktop */
+    .post-content h1 {
+        font-size: 2.25rem;
+    }
+
+    .post-content h2 {
+        font-size: 1.875rem;
+    }
+
+    .post-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .post-content p {
+        margin-bottom: 2rem;
+        line-height: 2.2;
     }
 }
-
-/* --- END: IMAGE AND CAPTION STYLES --- */
