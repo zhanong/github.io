@@ -169,6 +169,11 @@ body {
     overflow-x: auto;
 }
 
+.post-content pre {
+    margin-bottom: 1.5rem;
+    font-size: inherit;
+}
+
 .post-content ul {
     list-style-type: disc;
     padding-left: 2em;
@@ -244,6 +249,9 @@ body {
         /* Calculation: 56rem container - 3rem outer padding - 6rem inner padding */
         max-height: 47rem;
     }
+    .post-content pre {
+    margin-bottom: 1.6rem;
+}
 }
 
 /* 5.2. Large Screens ('lg' breakpoint, 1024px) and up */
