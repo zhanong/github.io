@@ -121,7 +121,7 @@ body {
 .post-content {
     /* Set a smaller base font for mobile (13px) to scale all rem units down */
     font-size: 0.9rem;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.05em;
 }
 
 .post-content h1,
