@@ -117,7 +117,7 @@ body {
 /* 4.1. Typography */
 .post-content {
     /* Set a smaller base font for mobile (13px) to scale all rem units down */
-    font-size: 0.8125rem; 
+    font-size: 0.6rem; 
 }
 
 .post-content h1,
