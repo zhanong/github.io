@@ -76,14 +76,14 @@
             if (!navPlaceholder) return; // Guard against missing element
 
             navPlaceholder.innerHTML = `
-            <nav class="flex flex-wrap items-baseline">
-                <div class="mr-4 mb-2">
-                    <a href="post.html?path=About.md" class="nav-link text-lg text-slate-600 hover:text-slate-900 transition-colors">About</a>
-                </div>
-                <div class="mr-4 mb-2">
-                    <span class="text-slate-300">|</span>
-                </div>
-                <ul id="category-buttons" class="flex flex-wrap">
+            <nav>
+                <ul id="category-buttons" class="flex flex-wrap items-baseline">
+                    <li class="mr-4 mb-2">
+                        <a href="post.html?path=About.md" class="nav-link text-lg text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    </li>
+                    <li class="mr-4 mb-2">
+                        <span class="text-slate-300">|</span>
+                    </li>
                 </ul>
             </nav>
             `;
@@ -93,7 +93,7 @@
             const navLinksContainer = document.getElementById('category-buttons');
             if (!navLinksContainer) return; // Guard against missing element
 
-            // We are now appending to the UL, so we use +=
+            // Use += to append the category links to the list that already contains "About"
             navLinksContainer.innerHTML += categoriesConfig.map(category => `
                 <li class="mr-4 mb-2">
                     <a href="#" class="nav-link category-filter text-lg text-slate-600 hover:text-slate-900 transition-colors" data-category="${category.name}">
