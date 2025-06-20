@@ -127,7 +127,7 @@
                 const postHTML = marked.parse(contentBody, { renderer });
 
                 container.innerHTML = `
-                    <h1 class="text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
+                    <h1 class="text-3xl lg:text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
                     <p class="text-slate-500 mb-8">${displayDate || ''}</p>
                     <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
                 `;
