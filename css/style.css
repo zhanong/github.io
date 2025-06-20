@@ -115,6 +115,11 @@ body {
 /* --- 4. POST CONTENT (Mobile-First) --- */
 
 /* 4.1. Typography */
+.post-content {
+    /* Set a smaller base font for mobile (13px) to scale all rem units down */
+    font-size: 0.8125rem; 
+}
+
 .post-content h1,
 .post-content h2,
 .post-content h3 {
@@ -124,11 +129,11 @@ body {
 }
 
 .post-content h1 {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
 }
 
 .post-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .post-content h3 {
@@ -189,7 +194,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     /* Default max-height for smallest screens */
-    max-height: 50rem; /* 56rem container - 2rem outer padding - 4rem inner padding */
+    max-height: 50rem;
 }
 
 .post-content > img,
@@ -233,7 +238,8 @@ body {
     .post-content > img,
     .post-content p > img,
     .post-content .image-card img {
-        max-height: 47rem; /* 56rem container - 3rem outer padding - 6rem inner padding */
+        /* Calculation: 56rem container - 3rem outer padding - 6rem inner padding */
+        max-height: 47rem;
     }
 }
 
@@ -243,10 +249,16 @@ body {
     .post-content > img,
     .post-content p > img,
     .post-content .image-card img {
-        max-height: 44rem; /* 56rem container - 4rem outer padding - 8rem inner padding */
+        /* Calculation: 56rem container - 4rem outer padding - 8rem inner padding */
+        max-height: 44rem;
     }
 
     /* Adjust typography for desktop */
+    .post-content {
+        /* On large screens, align with prose-xl which sets a 20px base font */
+        font-size: 1.25rem;
+    }
+
     .post-content h1 {
         font-size: 2.25rem;
     }
