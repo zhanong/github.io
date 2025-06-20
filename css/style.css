@@ -256,7 +256,7 @@ body {
     /* Adjust typography for desktop */
     .post-content {
         /* On large screens, align with prose-xl which sets a 20px base font */
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .post-content h1 {
@@ -272,7 +272,7 @@ body {
     }
 
     .post-content p {
-        margin-bottom: 2rem;
+        margin-bottom: 1.6rem;
         line-height: 2.2;
     }
 }
