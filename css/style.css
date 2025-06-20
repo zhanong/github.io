@@ -120,7 +120,7 @@ body {
 /* 4.1. Typography */
 .post-content {
     /* Set a smaller base font for mobile (13px) to scale all rem units down */
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .post-content h1,
@@ -140,7 +140,7 @@ body {
 }
 
 .post-content h3 {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .post-content p {
@@ -196,7 +196,6 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    /* Default max-height for smallest screens */
     max-height: 50rem;
 }
 
