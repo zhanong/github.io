@@ -244,6 +244,9 @@ body {
     border: 0;
 }
 
+/* --- START: IMAGE AND CAPTION STYLES --- 
+*/
+
 /* * Styles for regular (un-captioned) images. 
  * This ensures they still look like cards, just as they did before.
  */
@@ -261,22 +264,22 @@ body {
  * This is now the element that has the shadow and border, wrapping everything.
  */
 .post-content .image-card {
+    width: -moz-fit-content;
+    width: fit-content;
     max-width: 100%;
     margin: 2em auto;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    overflow: hidden; /* Crucial for containing the rounded corners */
-    background-color: #f8fafc; /* Sets a background for the caption area */
+    overflow: hidden;
+    background-color: #f8fafc;
 }
 
 /* * Removes default styling from the image when it's inside our card. 
  */
 .post-content .image-card img {
-    width: 100%;
     max-width: 100%;
     max-height: 56rem;
-    object-fit: contain;
-    display: block; /* Removes bottom space */
+    display: block;
     margin: 0;
     border-radius: 0;
     box-shadow: none;
@@ -287,7 +290,8 @@ body {
 .post-content .image-card .image-caption {
     padding: 0.75em 1em;
     text-align: center;
-    font-size: 0.9rem;
-    color: #475569;
-    font-style: italic;
+    font-size: 0.8rem;
+    color: #556172;
 }
+/* --- END: IMAGE AND CAPTION STYLES --- 
+*/
