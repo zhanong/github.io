@@ -1,7 +1,7 @@
 ---
 title: Article Style LoRa Tuning
 date: 2025-04-30
-featureImage: img/20250430_cover.png
+featureImage: img/20250430/cover.png
 summary: My try of tuning a Deepseek LoRa.
 tags: Python, LlamaFactory, LLM
 ---

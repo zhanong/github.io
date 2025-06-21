@@ -1,17 +1,23 @@
 ---
-title: ArchiHouse
-date: 2012-10-15
-featureImage: img/20121015/unitSection.png
-summary: A domitory for re-imagining the collective life.
+title: City Boundary
+date: 2013-10-15
+featureImage: img/20131015/cover.png
+summary: Bus terminal as a symbolic "boundary".
 tags: Vray, Rhino
 ---
-![](img/20121015/model.png)
+![](img/20131015/model.png)
 
-This second-year studio project proposed a 1,500-square-meter dormitory for 80 architecture students. Acknowledging that these students frequently work in their dorms, the design prioritizes a large, shared common area to foster collaboration by making personal spaces more efficient.
+For a third-year studio project, I designed a bus terminal for suburban Guangzhou, focusing on the concept of the terminal as a symbolic "boundary" to the city. My goal was to create a tangible feeling of arrival or departure.
 
-![The Shared Common Area Embeded at the Courtyard](img/20121015/overallSection.png)
+![Layered Space](img/20131015/concept.png)
 
-The solution features semi-private rooms arranged in four-person suites. Folding doors between rooms allow students to create either private zones or larger, connected spaces for group work. This layered design offers maximum spatial flexibility, balancing the need for individual focus with the benefits of a strong studio community.
+The design organizes programmatic functions into distinct "layers," which are then stacked. To make the experience of moving through these layers more memorable, each is given a unique spatial quality (e.g., high and bright vs. dark and narrow). This strategy of creating a sequence of contrasting spaces reinforces the feeling of crossing a threshold.
 
-![Section of A Unit](img/20121015/unitSection.png)
-![Reflexible Spatial Combination](img/20121015/unitPlan.png)
+![Layering on Plan](img/20131015/plan.png)
+
+![Layering on Section](img/20131015/axonSection.png)
+
+![Layering on Section](img/20131015/section.png)
+
+![](img/20131015/rendering.png)
+
