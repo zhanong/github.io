@@ -7,5 +7,5 @@ tags: Unity, DevLog
 ---
 
 <div class="video-container">
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114595968589791&bvid=BV1GW7nzuETz&cid=30227893601&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dRDIYczP5Nw?si=aTpDXUlNTbMdC50c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
