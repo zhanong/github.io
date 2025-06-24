@@ -32,7 +32,7 @@
     "textColor": "text-gray-500"
   },
   "Design": {
-    "backgroundColor": "bg-gray-100",
+    "backgroundColor": "bg-zinc-100",
     "textColor": "text-gray-500"
   },
   "Vray": {
@@ -47,8 +47,28 @@
     "backgroundColor": "bg-amber-100",
     "textColor": "text-gray-500"
   },
+    "n8n": {
+    "backgroundColor": "bg-emerald-100",
+    "textColor": "text-gray-500"
+  },
+    "HTML": {
+    "backgroundColor": "bg-sky-100",
+    "textColor": "text-gray-500"
+  },
+    "Cloud": {
+    "backgroundColor": "bg-violet-100",
+    "textColor": "text-gray-500"
+  },
+    "Processing": {
+    "backgroundColor": "bg-fuchsia-100",
+    "textColor": "text-gray-500"
+  },
+    "Docker": {
+    "backgroundColor": "bg-rose-100",
+    "textColor": "text-gray-500"
+  },
   "default": {
-    "backgroundColor": "bg-slate-100",
+    "backgroundColor": "bg-gray-100",
     "textColor": "text-gray-500"
   }
 }

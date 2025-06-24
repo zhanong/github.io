@@ -1,6 +1,23 @@
 [
   {
     "attributes": {
+      "title": "Automated Blog Workflow",
+      "date": "2025-05-14",
+      "featureImage": "img/20250514/cover.png",
+      "summary": "An automated workflow from collecting sources, processing, to uploading to platform",
+      "tags": "Python, n8n, HTML, Cloud, Processing, Docker"
+    },
+    "path": "posts/Tech/20250514_AutomatedWorkflowForBlog.md",
+    "category": "Tech",
+    "categoryConfig": {
+      "name": "Tech",
+      "folder": "Tech",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#2474d9]"
+    }
+  },
+  {
+    "attributes": {
       "title": "Article Style LoRa Tuning",
       "date": "2025-04-30",
       "featureImage": "img/20250430/cover.png",
