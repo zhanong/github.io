@@ -1,7 +1,7 @@
 ---
 title: Section Architect | Intro
-date: 2025-06-01
-featureImage: img/20250601/cover.png
+date: 2025-01-10
+featureImage: img/20250110/cover.png
 summary: An overview of my previous project. The game is inspired by the architectural section diagram. 
 tags: Unity, DevLog
 ---
