@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 
@@ -45,7 +44,7 @@ try {
     // 2. Go through each category folder
     for (const category of fetchableCategories) {
         const categoryDir = path.join(postsDir, category.folder);
-        console.log(`Processing category: <span class="math-inline">\{category\.name\} in /</span>{category.folder}`);
+        console.log(`Processing category: ${category.name} in /${category.folder}`);
 
         const files = fs.readdirSync(categoryDir);
         const mdFiles = files.filter(file => file.endsWith('.md'));
@@ -60,7 +59,7 @@ try {
             if (attributes.date) { // Ensure it's a valid post
                 allPosts.push({
                     attributes,
-                    path: `posts/<span class="math-inline">\{category\.folder\}/</span>{file}`, // Create the relative path for the URL
+                    path: `posts/${category.folder}/${file}`, // Create the relative path for the URL
                     category: category.name,
                     categoryConfig: category
                 });
