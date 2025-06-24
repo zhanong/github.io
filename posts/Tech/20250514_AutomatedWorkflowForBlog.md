@@ -5,6 +5,9 @@ featureImage: img/20250514/cover.png
 summary: An automated workflow from collecting sources, processing, to uploading to platform 
 tags: Python, n8n, HTML, Cloud, Processing, Docker
 ---
+
+![](img/20250514/showcase.gif)
+
 I have a passion for automation, and a video about n8n inspired me to channel this obsession into a project.
 
 The concept was to create a blog that delivered high-quality articles daily. I envisioned a beautifully formatted publication, not just an average newsletter, specifically for WeChat, one of the most popular blogging platforms. My goal was to automate as much of the workflow as possible.
