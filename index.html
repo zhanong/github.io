@@ -114,6 +114,12 @@
                 postUrl = `post.html?path=${post.path}`;
             }
 
+            // ======================= DEBUG START =======================
+            console.log("--- Creating Post Card ---");
+            console.log("Post Data:", post);
+            console.log("Generated URL:", postUrl);
+            // ======================= DEBUG END =======================
+
             let tagsHTML = '';
             if (tags && typeof tags === 'string') {
                 const tagList = tags.split(',').map(tag => tag.trim());
@@ -124,27 +130,27 @@
             }
 
             const postContent = `
-            <div class="relative h-48 flex-grow dark-overlay image-top-shadow">
-                <img src="${featureImage}" alt="${title || ''}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0" onerror="this.style.display='none';">
-                <div class="absolute inset-0 p-8 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 bg-white bg-opacity-95 overflow-y-auto">
-                    <p class="text-sm font-light text-slate-700">${summary || ''}</p>
-                </div>
+        <div class="relative h-48 flex-grow dark-overlay image-top-shadow">
+            <img src="${featureImage}" alt="${title || ''}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0" onerror="this.style.display='none';">
+            <div class="absolute inset-0 p-8 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 bg-white bg-opacity-95 overflow-y-auto">
+                <p class="text-sm font-light text-slate-700">${summary || ''}</p>
             </div>
-            `;
+        </div>
+        `;
 
 
             return `
-                <a href="${postUrl}" class="group block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col h-full">
-                    <div class="p-4">
-                        <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
-                        <div class="flex items-baseline flex-wrap mt-2">
-                            <p class="text-xs ${categoryStyle.textColor} opacity-75 mr-3 whitespace-nowrap">${date || ''}</p>
-                            ${tagsHTML}
-                        </div>
+            <a href="${postUrl}" class="group block ${categoryStyle.colorClass} rounded-lg shadow-md card-hover overflow-hidden flex flex-col h-full">
+                <div class="p-4">
+                    <h3 class="font-bold truncate ${categoryStyle.textColor}">${title || 'Untitled Post'}</h3>
+                    <div class="flex items-baseline flex-wrap mt-2">
+                        <p class="text-xs ${categoryStyle.textColor} opacity-75 mr-3 whitespace-nowrap">${date || ''}</p>
+                        ${tagsHTML}
                     </div>
-                    ${postContent}
-                </a>
-            `;
+                </div>
+                ${postContent}
+            </a>
+        `;
         }
 
         function renderPosts(categoryFilter = 'All') {
