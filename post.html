@@ -62,13 +62,6 @@
                 const externalUrl = urlParams.get('url');
                 const postPath = urlParams.get('path');
 
-                // ======================= DEBUG START =======================
-                console.log("--- Loading Post Page ---");
-                console.log("Full URL query string:", window.location.search);
-                console.log("Parsed 'path' parameter:", postPath);
-                // ======================= DEBUG END =======================
-
-
                 let displayTitle, displayDate, contentBody;
 
                 if (externalUrl) {
@@ -83,11 +76,6 @@
                     contentBody = rewriteRelativeImagePaths(body, externalUrl);
                 } else if (postPath) {
                     const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${postPath}`;
-
-                    // ======================= DEBUG START =======================
-                    console.log("Constructed GitHub API URL:", apiUrl);
-                    // ======================= DEBUG END =======================
-
                     const response = await fetch(apiUrl);
                     if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
                     const fileData = await response.json();
@@ -106,7 +94,7 @@
 
                 // START OF FINAL FIX
                 const renderer = new marked.Renderer();
-
+                
                 renderer.image = (href, title, text) => {
                     let imageHref, imageText;
 
@@ -126,23 +114,23 @@
                     // Create captioned image card if there is alt text
                     if (imageText) {
                         return `
-                    <figure class="image-card">
-                        <img src="${finalHref}" alt="${imageText}" />
-                        <figcaption class="image-caption">${imageText}</figcaption>
-                    </figure>
-                    `;
+                        <figure class="image-card">
+                            <img src="${finalHref}" alt="${imageText}" />
+                            <figcaption class="image-caption">${imageText}</figcaption>
+                        </figure>
+                        `;
                     }
-
+                    
                     return `<img src="${finalHref}" alt="" />`;
                 };
 
                 const postHTML = marked.parse(contentBody, { renderer });
 
                 container.innerHTML = `
-                <h1 class="text-3xl lg:text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
-                <p class="text-slate-500 mb-8">${displayDate || ''}</p>
-                <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
-            `;
+                    <h1 class="text-3xl lg:text-4xl font-extrabold text-slate-800 mb-2">${displayTitle || 'Untitled Post'}</h1>
+                    <p class="text-slate-500 mb-8">${displayDate || ''}</p>
+                    <div class="post-content prose lg:prose-xl max-w-none">${postHTML}</div>
+                `;
 
                 document.querySelectorAll('pre code').forEach((block) => {
                     hljs.highlightElement(block);
