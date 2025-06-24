@@ -18,19 +18,19 @@ To overcome this, I developed a final workflow composed of three main parts. To 
 
 ![](img/20250514/workflow.png)
 
-### n8n
+# n8n
 
 ![](img/20250514/n8n.png)
 
 To avoid the inconvenience of editing configurations directly on the cloud, I store all my content sources in a **Google Sheet**. My n8n workflow fetches this configuration and applies a series of filtering rules. The articles that pass these rules, which I call the "finalists," are then sent to **Gemini** for summarizing and calibration. This process generates a **Markdown** file containing the main content, along with two **JSON** files. The first JSON file configures the appearance of each summary within the article. The second saves the titles of the day's finalists to prevent them from being selected again the following day.
 
-### Processing
+# Processing
 
 Plain text alone isn't engaging enough. While AI can generate images, they often feel generic and lack a sense of deliberate design. I wanted to generate images in a more mathematical and unique way. Fortunately, I discovered a [blog post](https://sighack.com/post/getting-creative-with-perlin-noise-fields) that provided the foundation I needed. Building on this, I created a process that randomly generates organic or geometric patterns.
 
 ![An Animation from the Code](img/20250514/processing.gif)
 
-### Python
+# Python
 
 The uploading process required special attention for two main reasons:
 
