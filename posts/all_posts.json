@@ -8,7 +8,7 @@
       "link": "https://raw.githubusercontent.com/zhanong/Simple-Plot-with-ScriptableObject-for-Unity/refs/heads/main/README.md",
       "tags": "Unity"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/SimplePlot.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -26,7 +26,7 @@
       "link": "https://raw.githubusercontent.com/zhanong/Easy-ScriptableObject-To-ECS-Blob/refs/heads/main/README.md",
       "tags": "Unity, ECS"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/ScriptableObjectToBlob.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -44,7 +44,7 @@
       "link": "https://raw.githubusercontent.com/zhanong/Minimal-ECS-Framework/refs/heads/main/README.md",
       "tags": "Unity, ECS"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/MinimalECSFramework.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -61,7 +61,7 @@
       "summary": "An overview of my previous project. The game is inspired by the architectural section diagram.",
       "tags": "Unity, DevLog"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/SectionArchitectIntro.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -78,7 +78,7 @@
       "summary": "My try of tuning a Deepseek LoRa.",
       "tags": "Python, LlamaFactory, LLM"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Tech/20250430_DeepseekLoraForArchitectureArticle.md",
     "category": "Tech",
     "categoryConfig": {
       "name": "Tech",
@@ -95,7 +95,7 @@
       "summary": "This project shows how I collect data and process them using ArcGIS, and trained a simple model to predict urbanization.",
       "tags": "ArcGIS, Python, ML"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Tech/20250419_ArcGISPredictUrdanization.md",
     "category": "Tech",
     "categoryConfig": {
       "name": "Tech",
@@ -112,7 +112,7 @@
       "summary": "A demostration using Unity ECS. 2000 people take lifts at the same time.",
       "tags": "Unity, ECS"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/ECS2000PeopleOnLifts.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -130,7 +130,7 @@
       "link": "https://raw.githubusercontent.com/zhanong/Native-Mapped-Array/refs/heads/main/README.md",
       "tags": "Unity, ECS, Burst"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/Native Mapped Array.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -147,7 +147,7 @@
       "summary": "My first try on a regular game.",
       "tags": "Unity, DevLog"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/Landscaper.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -165,7 +165,7 @@
       "link": "https://raw.githubusercontent.com/zhanong/WorkTimeRecorder/refs/heads/main/README.md",
       "tags": "C#"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Tech/20250419_WorkTimeRecorder.md",
     "category": "Tech",
     "categoryConfig": {
       "name": "Tech",
@@ -182,7 +182,7 @@
       "summary": "My first game.",
       "tags": "Unity, DevLog"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Game/GhostHunterHunter.md",
     "category": "Game",
     "categoryConfig": {
       "name": "Game",
@@ -199,7 +199,7 @@
       "summary": "A renovation of a barn house. Turn it into a cozy house featuring a bath.",
       "tags": "Vray, Rhino"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Architecture/20170315_BathHouse.md",
     "category": "Architecture",
     "categoryConfig": {
       "name": "Architecture",
@@ -216,7 +216,7 @@
       "summary": "A small library on a desert island.",
       "tags": "Vray, Rhino, EnergyPlus"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Architecture/20160530_ModularLibrary.md",
     "category": "Architecture",
     "categoryConfig": {
       "name": "Architecture",
@@ -233,7 +233,7 @@
       "summary": "Bus terminal as a symbolic \"boundary\".",
       "tags": "Vray, Rhino"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Architecture/20131015_CityBoundary.md",
     "category": "Architecture",
     "categoryConfig": {
       "name": "Architecture",
@@ -250,7 +250,7 @@
       "summary": "Intergrating nature and life.",
       "tags": "Vray, Rhino"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Architecture/20121230_Villa.md",
     "category": "Architecture",
     "categoryConfig": {
       "name": "Architecture",
@@ -267,7 +267,7 @@
       "summary": "A domitory for re-imagining the collective life.",
       "tags": "Vray, Rhino"
     },
-    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "path": "posts/Architecture/20121015_ArchiHouse.md",
     "category": "Architecture",
     "categoryConfig": {
       "name": "Architecture",
