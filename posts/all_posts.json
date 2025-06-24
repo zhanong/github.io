@@ -1,0 +1,279 @@
+[
+  {
+    "attributes": {
+      "title": "Simple Plot",
+      "date": "2025-06-13",
+      "summary": "A simple tool to visually script quests and tutorials in Unity.",
+      "featureImage": "img/20250613/cover.png",
+      "link": "https://raw.githubusercontent.com/zhanong/Simple-Plot-with-ScriptableObject-for-Unity/refs/heads/main/README.md",
+      "tags": "Unity"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "ECSy Config to Blob",
+      "date": "2025-06-12",
+      "featureImage": "img/20250612/cover.png",
+      "summary": "A Utility for Streamlining ScriptableObject to Blob Asset",
+      "link": "https://raw.githubusercontent.com/zhanong/Easy-ScriptableObject-To-ECS-Blob/refs/heads/main/README.md",
+      "tags": "Unity, ECS"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Minimal ECS Framework",
+      "date": "2025-06-07",
+      "featureImage": "img/20250607/cover.png",
+      "summary": "An ECS framework developped from my construction simulation game.",
+      "link": "https://raw.githubusercontent.com/zhanong/Minimal-ECS-Framework/refs/heads/main/README.md",
+      "tags": "Unity, ECS"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Section Architect | Intro",
+      "date": "2025-06-01",
+      "featureImage": "img/20250601/cover.png",
+      "summary": "An overview of my previous project. The game is inspired by the architectural section diagram.",
+      "tags": "Unity, DevLog"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Article Style LoRa Tuning",
+      "date": "2025-04-30",
+      "featureImage": "img/20250430/cover.png",
+      "summary": "My try of tuning a Deepseek LoRa.",
+      "tags": "Python, LlamaFactory, LLM"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Tech",
+    "categoryConfig": {
+      "name": "Tech",
+      "folder": "Tech",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#2474d9]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Predicting the Urbanization",
+      "date": "2025-04-19",
+      "featureImage": "img/20250419_cover.png",
+      "summary": "This project shows how I collect data and process them using ArcGIS, and trained a simple model to predict urbanization.",
+      "tags": "ArcGIS, Python, ML"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Tech",
+    "categoryConfig": {
+      "name": "Tech",
+      "folder": "Tech",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#2474d9]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "ECS Lifts for 2ooo People",
+      "date": "2024-08-19",
+      "featureImage": "img/2000PeopleLift.png",
+      "summary": "A demostration using Unity ECS. 2000 people take lifts at the same time.",
+      "tags": "Unity, ECS"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Native Mapped Array",
+      "date": "2024-06-12",
+      "featureImage": "img/20240612/cover.png",
+      "summary": "A Burstable struct of a hashmap of arrays.",
+      "link": "https://raw.githubusercontent.com/zhanong/Native-Mapped-Array/refs/heads/main/README.md",
+      "tags": "Unity, ECS, Burst"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Landscaper",
+      "date": "2024-04-01",
+      "featureImage": "img/20240401/cover.png",
+      "summary": "My first try on a regular game.",
+      "tags": "Unity, DevLog"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Work Time Recorder",
+      "date": "2024-02-17",
+      "featureImage": "img/20240217/cover.png",
+      "summary": "A silent recorder for immersive work experience.",
+      "link": "https://raw.githubusercontent.com/zhanong/WorkTimeRecorder/refs/heads/main/README.md",
+      "tags": "C#"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Tech",
+    "categoryConfig": {
+      "name": "Tech",
+      "folder": "Tech",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#2474d9]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Ghost Hunter Hunter",
+      "date": "2023-06-05",
+      "featureImage": "img/20230605/cover.png",
+      "summary": "My first game.",
+      "tags": "Unity, DevLog"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "House with a Bath",
+      "date": "2017-03-15",
+      "featureImage": "img/20170315/cover.png",
+      "summary": "A renovation of a barn house. Turn it into a cozy house featuring a bath.",
+      "tags": "Vray, Rhino"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Architecture",
+    "categoryConfig": {
+      "name": "Architecture",
+      "folder": "Architecture",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#33a166]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Modular Library",
+      "date": "2016-05-30",
+      "featureImage": "img/20160530/cover.png",
+      "summary": "A small library on a desert island.",
+      "tags": "Vray, Rhino, EnergyPlus"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Architecture",
+    "categoryConfig": {
+      "name": "Architecture",
+      "folder": "Architecture",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#33a166]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "City Boundary",
+      "date": "2013-10-15",
+      "featureImage": "img/20131015/cover.png",
+      "summary": "Bus terminal as a symbolic \"boundary\".",
+      "tags": "Vray, Rhino"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Architecture",
+    "categoryConfig": {
+      "name": "Architecture",
+      "folder": "Architecture",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#33a166]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "Villa In the Woods",
+      "date": "2012-12-30",
+      "featureImage": "img/20121230/cover.png",
+      "summary": "Intergrating nature and life.",
+      "tags": "Vray, Rhino"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Architecture",
+    "categoryConfig": {
+      "name": "Architecture",
+      "folder": "Architecture",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#33a166]"
+    }
+  },
+  {
+    "attributes": {
+      "title": "ArchiHouse",
+      "date": "2012-10-15",
+      "featureImage": "img/20121015/unitSection.png",
+      "summary": "A domitory for re-imagining the collective life.",
+      "tags": "Vray, Rhino"
+    },
+    "path": "posts/<span class=\"math-inline\">{category.folder}/</span>{file}",
+    "category": "Architecture",
+    "categoryConfig": {
+      "name": "Architecture",
+      "folder": "Architecture",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#33a166]"
+    }
+  }
+]
