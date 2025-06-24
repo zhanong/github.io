@@ -1,5 +1,5 @@
 ---
-title: Section Architect | Intro
+title: Ghost Hunter Hunter
 date: 2023-06-05
 featureImage: img/20230605/cover.png
 summary: My first game.

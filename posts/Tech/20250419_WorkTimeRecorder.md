@@ -1,5 +1,5 @@
 ---
-title: Work Time Recoder
+title: Work Time Recorder
 date: 2024-02-17
 featureImage: img/20240217/cover.png
 summary: A silent recorder for immersive work experience.
