@@ -5,7 +5,7 @@
       "date": "2025-06-01",
       "featureImage": "img/20250601/cover.png",
       "summary": "Construct your Tower of Babel in the cave",
-      "tags": "Unity, ECS, DevLog"
+      "tags": "Unity, ECS, DevLog, Featured"
     },
     "path": "posts/Game/CavePeoplevol1.md",
     "category": "Game",
@@ -22,7 +22,7 @@
       "date": "2025-05-14",
       "featureImage": "img/20250514/cover.png",
       "summary": "An automated workflow from collecting sources, processing, to uploading to platform",
-      "tags": "Python, n8n, HTML, Cloud, Processing, Docker"
+      "tags": "Python, n8n, HTML, Cloud, Processing, Docker, Featured"
     },
     "path": "posts/Tech/20250514_AutomatedWorkflowForBlog.md",
     "category": "Tech",
@@ -39,7 +39,7 @@
       "date": "2025-04-30",
       "featureImage": "img/20250430/cover.png",
       "summary": "My try of tuning a Deepseek LoRa.",
-      "tags": "Python, LlamaFactory, LLM"
+      "tags": "Python, LlamaFactory, LLM, Featured"
     },
     "path": "posts/Tech/20250430_DeepseekLoraForArchitectureArticle.md",
     "category": "Tech",
@@ -74,7 +74,7 @@
       "featureImage": "img/20250315/cover.png",
       "summary": "An ECS framework developped from my construction simulation game.",
       "link": "https://raw.githubusercontent.com/zhanong/Minimal-ECS-Framework/refs/heads/main/README.md",
-      "tags": "Unity, ECS"
+      "tags": "Unity, ECS, Featured"
     },
     "path": "posts/Game/MinimalECSFramework.md",
     "category": "Game",
@@ -179,7 +179,7 @@
       "date": "2024-04-01",
       "featureImage": "img/20240401/cover.png",
       "summary": "My first try on a regular game.",
-      "tags": "Unity, DevLog"
+      "tags": "Unity, DevLog, Featured"
     },
     "path": "posts/Game/Landscaper.md",
     "category": "Game",
@@ -248,7 +248,7 @@
       "date": "2016-05-30",
       "featureImage": "img/20160530/cover.png",
       "summary": "A small library on a desert island.",
-      "tags": "Vray, Rhino, EnergyPlus"
+      "tags": "Vray, Rhino, EnergyPlus, Featured"
     },
     "path": "posts/Architecture/20160530_ModularLibrary.md",
     "category": "Architecture",
