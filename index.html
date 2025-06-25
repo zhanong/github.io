@@ -149,14 +149,29 @@
 
         function renderPosts(categoryFilter = 'All') {
             const container = document.getElementById('posts-container');
-            const postsToRender = categoryFilter === 'All' ? allPosts : allPosts.filter(post => post.category === categoryFilter);
+            let postsToRender = categoryFilter === 'All' ? allPosts : allPosts.filter(post => post.category === categoryFilter);
 
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.toggle('active', link.dataset.category === categoryFilter);
             });
 
-            if (postsToRender.length > 0) {
-                container.innerHTML = postsToRender.map(createPostCard).join('');
+            const featuredPosts = postsToRender.filter(post => post.attributes.tags && post.attributes.tags.includes('Featured'));
+            const otherPosts = postsToRender.filter(post => !post.attributes.tags || !post.attributes.tags.includes('Featured'));
+
+            let html = '';
+
+            if (featuredPosts.length > 0) {
+                featuredPosts.forEach(post => {
+                    html += `<div class="col-span-1 sm:col-span-2 lg:col-span-3">${createPostCard(post)}</div>`;
+                });
+            }
+
+            if (otherPosts.length > 0) {
+                html += otherPosts.map(createPostCard).join('');
+            }
+
+            if (html) {
+                container.innerHTML = html;
             } else {
                 container.innerHTML = '<p class="col-span-full text-center text-slate-600">No posts found in this category.</p>';
             }

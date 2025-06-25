@@ -3,7 +3,7 @@ title: Landscaper
 date: 2024-04-01
 featureImage: img/20240401/cover.png
 summary: My first try on a regular game.
-tags: Unity, DevLog
+tags: Unity, DevLog, Featured
 ---
 
 <div class="video-container">

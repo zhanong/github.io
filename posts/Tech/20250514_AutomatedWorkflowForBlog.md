@@ -3,7 +3,7 @@ title: Automated Blog Workflow
 date: 2025-05-14
 featureImage: img/20250514/cover.png
 summary: An automated workflow from collecting sources, processing, to uploading to platform 
-tags: Python, n8n, HTML, Cloud, Processing, Docker
+tags: Python, n8n, HTML, Cloud, Processing, Docker, Featured
 ---
 
 ![](img/20250514/showcase.gif)

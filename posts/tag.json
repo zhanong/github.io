@@ -1,4 +1,8 @@
 {
+  "Featured": {
+    "backgroundColor": "bg-red-100",
+    "textColor": "text-red-800"
+  },
   "Unity": {
     "backgroundColor": "bg-green-100",
     "textColor": "text-gray-500"

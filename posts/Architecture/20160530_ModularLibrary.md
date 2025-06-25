@@ -3,7 +3,7 @@ title: Modular Library
 date: 2016-05-30
 featureImage: img/20160530/cover.png
 summary: A small library on a desert island.
-tags: Vray, Rhino, EnergyPlus
+tags: Vray, Rhino, EnergyPlus, Featured
 ---
 
 This diploma project originated from a workshop inspired by a client's ambition to develop a desert island into a tourist attraction. Each student was tasked with designing a modular building, giving general consideration to the island's overall plan.

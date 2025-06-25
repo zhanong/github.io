@@ -3,7 +3,7 @@ title: Cave People vol. 1
 date: 2025-06-01
 featureImage: img/20250601/cover.png
 summary: Construct your Tower of Babel in the cave
-tags: Unity, ECS, DevLog
+tags: Unity, ECS, DevLog, Featured
 ---
 
 <div class="video-container">
