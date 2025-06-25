@@ -1,6 +1,23 @@
 [
   {
     "attributes": {
+      "title": "Cave People vol. 1",
+      "date": "2025-06-01",
+      "featureImage": "img/20250601/cover.png",
+      "summary": "Construct your Tower of Babel in the cave",
+      "tags": "Unity, ECS, DevLog"
+    },
+    "path": "posts/Game/CavePeoplevol1.md",
+    "category": "Game",
+    "categoryConfig": {
+      "name": "Game",
+      "folder": "Game",
+      "colorClass": "bg-[#faf9fa]",
+      "textColor": "text-[#723fc8]"
+    }
+  },
+  {
+    "attributes": {
       "title": "Automated Blog Workflow",
       "date": "2025-05-14",
       "featureImage": "img/20250514/cover.png",
