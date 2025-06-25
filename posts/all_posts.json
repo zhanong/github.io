@@ -5,7 +5,7 @@
       "date": "2025-06-01",
       "featureImage": "img/20250601/cover.png",
       "summary": "Construct your Tower of Babel in the cave",
-      "tags": "Unity, ECS, DevLog, Featured"
+      "tags": "Featured, Unity, ECS, DevLog"
     },
     "path": "posts/Game/CavePeoplevol1.md",
     "category": "Game",
@@ -39,7 +39,7 @@
       "date": "2025-04-30",
       "featureImage": "img/20250430/cover.png",
       "summary": "My try of tuning a Deepseek LoRa.",
-      "tags": "Python, LlamaFactory, LLM, Featured"
+      "tags": "Featured, Python, LlamaFactory, LLM"
     },
     "path": "posts/Tech/20250430_DeepseekLoraForArchitectureArticle.md",
     "category": "Tech",
@@ -74,7 +74,7 @@
       "featureImage": "img/20250315/cover.png",
       "summary": "An ECS framework developped from my construction simulation game.",
       "link": "https://raw.githubusercontent.com/zhanong/Minimal-ECS-Framework/refs/heads/main/README.md",
-      "tags": "Unity, ECS, Featured"
+      "tags": "Featured, Unity, ECS"
     },
     "path": "posts/Game/MinimalECSFramework.md",
     "category": "Game",
@@ -91,7 +91,7 @@
       "date": "2025-01-10",
       "featureImage": "img/20250110/cover.png",
       "summary": "An overview of my previous project. The game is inspired by the architectural section diagram.",
-      "tags": "Unity, DevLog"
+      "tags": "Featured, Unity, DevLog"
     },
     "path": "posts/Game/SectionArchitectIntro.md",
     "category": "Game",
@@ -179,7 +179,7 @@
       "date": "2024-04-01",
       "featureImage": "img/20240401/cover.png",
       "summary": "My first try on a regular game.",
-      "tags": "Unity, DevLog, Featured"
+      "tags": "Featured, Unity, DevLog"
     },
     "path": "posts/Game/Landscaper.md",
     "category": "Game",
@@ -248,7 +248,7 @@
       "date": "2016-05-30",
       "featureImage": "img/20160530/cover.png",
       "summary": "A small library on a desert island.",
-      "tags": "Vray, Rhino, EnergyPlus, Featured"
+      "tags": "Featured, Vray, Rhino, EnergyPlus"
     },
     "path": "posts/Architecture/20160530_ModularLibrary.md",
     "category": "Architecture",
