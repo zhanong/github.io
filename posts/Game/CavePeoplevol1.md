@@ -7,7 +7,7 @@ tags: Unity, ECS, DevLog, Featured
 ---
 
 <div class="video-container">
-[<iframe width="560" height="315" src="https://www.youtube.com/embed/Oc6XLhKNK1I?si=tjWMifW---OIC0j0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>](https://youtu.be/uFJGayR5d2w?si=sbg7c-Tz-U49p3YQ)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uFJGayR5d2w?si=OUk07DTYut-Wxzeu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 I'm taking the spirit of Section Architect and launching it into a new, non-realistic world.
